@@ -5,7 +5,7 @@
 - Scenario Manager : 김진우
 - DBA : 심재아
 
-1. 집 가고 싶조 프로젝트 ( Netflix clone )
+[] 집 가고 싶조 프로젝트 ( Netflix clone )
     - 아래 항목들에 대한 기능 구현
         - TV shows
         - Movies
