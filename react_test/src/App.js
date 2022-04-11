@@ -10,6 +10,8 @@ import TestApp from './03/TestApp';
 import SFC from './03/SFC';
 import ListExample from './03/ListExample';
 import TodoList from './03/TodoList';
+import Input from './03/input';
+
 class App extends Component {
   render() {
     return (
@@ -19,7 +21,7 @@ class App extends Component {
       //     <TodaysPlan />  
       //   </div>
       // </div>
-      <div><TodoList /></div>
+      <div><Input /></div>
 
     )
   }
