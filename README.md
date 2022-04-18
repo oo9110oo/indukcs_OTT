@@ -13,3 +13,9 @@
         - My List
         - Review Page
         - Play Button을 통한 임의 영상 재생
+
+- 프로젝트 스케치 및 컴포넌트 구성
+
+![Alt text](/image/1.jpg)
+![Alt text](/image/2.jpg)
+![Alt text](/image/3.jpg)
