@@ -1,0 +1,20 @@
+# NPM packages folder.
+node_modules
+
+# Build files
+dist/
+
+# Environment varialbes
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# firebase
+.firebase
+.firebaserc
+.firebase.json
+
+.vercel
