@@ -16,6 +16,7 @@
 
 - 프로젝트 스케치 및 컴포넌트 구성
 
-![Alt text](/image/1.jpg)
-![Alt text](/image/2.jpg)
-![Alt text](/image/3.jpg)
+![Alt text](/image/홈_상단.png)
+![Alt text](/image/홈_중단.png)
+![Alt text](/image/홈_하단.png)
+![Alt_text](/image/홈_상세정보.png)
