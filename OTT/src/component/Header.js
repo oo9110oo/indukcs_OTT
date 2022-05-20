@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useParams, useLocation, useNavigate } from 'react-router-dom'
 
 import { useScroll } from '../hook/useScroll'
-import SearchLogo from '../static/images/search-icon.svg'
+import { ReactComponent as SearchLogo } from '../static/images/search-icon.svg'
 import DuckingLogo from '../static/images/Netflix_Logo_RGB.png'
-import BellLogo from '../static/images/bell-logo.svg'
-import DropdownArrow from '../static/images/drop-down-arrow.svg'
-// import DropdownContent from '../components/DropdownContent'
+import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
+// import DropdownArrow from '../static/images/drop-down-arrow.svg'
+import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
 
 const Navbar = ({ history }) => {
   const searchInput = React.useRef(null)
@@ -33,6 +32,7 @@ const Navbar = ({ history }) => {
     setUserInput('')
   }
 
+//  console.log(DropdownArrow)
   return (
     <nav className={'navigation ' + (scrollY > 50 ? 'black' : '')}>
       <ul className='navigation__container'>
@@ -44,6 +44,7 @@ const Navbar = ({ history }) => {
           />
         </NavLink>
         <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
+        {/* <img src="{DropdownArrow}" alt="DropdownArrow" /> */}
         <div className='navigation__container-link pseudo-link'>Home</div>
         <div className='navigation__container-link pseudo-link'>Movies</div>
         <div className='navigation__container-link pseudo-link'>TV</div>

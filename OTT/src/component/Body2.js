@@ -4,9 +4,10 @@ import MovieMain from './MovieMain'
 import MovieGroup from './MovieGroup'
 
 const Body = () => {
+    
     return (
         <div className='container'>
-            <p>movieMain</p>
+            <MovieMain />
         <div className='movieGroup'>
             <p>movieGroup</p>
         </div>

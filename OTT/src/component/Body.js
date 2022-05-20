@@ -18,17 +18,17 @@ const MainContent = ({ selectMovieHandler }) => {
 
   const dispatch = useDispatch()
 
-//   useEffect(() => {
-//     dispatch(movieActions.fetchMovieDetails('tv', '63351'))
-//     dispatch(movieActions.fetchNetflixOriginals())
-//     dispatch(movieActions.fetchTrending())
-//     dispatch(movieActions.fetchTopRated())
-//     dispatch(movieActions.fetchActionMovies())
-//     dispatch(movieActions.fetchComedyMovies())
-//     dispatch(movieActions.fetchHorrorMovies())
-//     dispatch(movieActions.fetchRomanceMovies())
-//     dispatch(movieActions.fetchDocumentaries())
-//   }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(movieActions.fetchMovieDetails('tv', '63351'))
+  //   dispatch(movieActions.fetchNetflixOriginals())
+  //   dispatch(movieActions.fetchTrending())
+  //   dispatch(movieActions.fetchTopRated())
+  //   dispatch(movieActions.fetchActionMovies())
+  //   dispatch(movieActions.fetchComedyMovies())
+  //   dispatch(movieActions.fetchHorrorMovies())
+  //   dispatch(movieActions.fetchRomanceMovies())
+  //   dispatch(movieActions.fetchDocumentaries())
+  // }, [dispatch])
 
   return (
     <div className='container'>

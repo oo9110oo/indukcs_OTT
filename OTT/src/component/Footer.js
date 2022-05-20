@@ -9,7 +9,7 @@ const footer = () => (
         href='https://github.com/devandres-tech'
       >
         {' '}
-        Dev Andres
+        DUCKING
       </a>
     </div>
   </footer>

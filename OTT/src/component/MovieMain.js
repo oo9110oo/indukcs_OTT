@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 
-import PlayLogo from '../static/images/play-button.svg'
-import AddLogo from '../static/images/add.svg'
-import MuteIcon from '../static/images/mute.svg'
-import UnmuteIcon from '../static/images/unmute.svg'
+import { ReactComponent as PlayLogo } from '../static/images/play-button.svg'
+import { ReactComponent as AddLogo } from '../static/images/add.svg'
+import { ReactComponent as MuteIcon } from '../static/images/mute.svg'
+import { ReactComponent as UnmuteIcon } from '../static/images/unmute.svg'
 import ReactPlayer from 'react-player'
 
-const Header = ({ movie: { name, overview } }) => {
+// const Moviemain = ({ movie: { name, overview } }) => {
+  
+const Moviemain = () => {
   const [isMuted, setIsMuted] = useState(true)
 
   return (
-    <header className='header'>
+    <div className='MovieMain'>
       <ReactPlayer
         playing={true}
         loop={true}
@@ -21,7 +23,7 @@ const Header = ({ movie: { name, overview } }) => {
         className='header__video'
         url='https://vimeo.com/636702859'
       />
-      <h1 className='header__container-heading'>{name}</h1>
+      <h1 className='header__container-heading'>Docter Strange</h1>
       <button
         onClick={() => alert('not a movie!')}
         className='header__container-btnPlay'
@@ -45,10 +47,10 @@ const Header = ({ movie: { name, overview } }) => {
           className='header__container-btnVolume'
         />
       )}
-      <p className='header__container-overview'>{overview}</p>
+      <p className='header__container-overview'>Overview</p>
       <div className='header__container--fadeBottom'></div>
-    </header>
+    </div>
   )
 }
 
-export default Header
+export default Moviemain

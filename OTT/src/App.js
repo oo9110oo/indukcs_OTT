@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './component/Footer'
-import Navbar from './component/Header2'
+import Navbar from './component/Header'
 import Home from './pages/Home'
 
 const App = () => (

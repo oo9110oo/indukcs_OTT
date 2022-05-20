@@ -24,8 +24,8 @@ const Home = () => {
     <>
       <div className='main-content'>
 
-        {/* <Body selectMovieHandler={selectMovieHandler} /> */}
-        <Body2 />
+        <Body2 selectMovieHandler={selectMovieHandler} />
+        {/* <Body2 /> */}
 
       </div>
       <Modal
