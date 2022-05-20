@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './component/Footer'
-import Navbar from './component/Header'
+import Navbar from './component/Header2'
 import Home from './pages/Home'
 
 const App = () => (
@@ -9,10 +9,6 @@ const App = () => (
     <Navbar />
     <Routes>
       <Route exact path='/' element={<Home />} />
-      {/* <Route path='/' element={<Navigate replace to='/browse' />} />
-      <Route exact path='/browse' element={<Home />} /> */}
-      {/* <Route path='/' exact render={() => <Navigate to='/browse' />} />
-      <Route path='/browse' element={<Home />} /> */}
     </Routes>
     <Footer />
   </BrowserRouter>

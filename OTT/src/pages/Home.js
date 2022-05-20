@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { Provider } from 'react-redux'
 
 import Body from '../component/Body'
+import Body2 from '../component/Body2'
+
 import Modal from '../component/Modal'
 import ModalMovie from '../component/MovieModal'
 
@@ -20,7 +23,10 @@ const Home = () => {
   return (
     <>
       <div className='main-content'>
-        <Body selectMovieHandler={selectMovieHandler} />
+
+        {/* <Body selectMovieHandler={selectMovieHandler} /> */}
+        <Body2 />
+
       </div>
       <Modal
         show={toggleModal}
