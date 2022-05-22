@@ -9,7 +9,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
 
   return (
       <div>
-          Modal Pages
+          Modal Pages 
       </div>
   )
 
