@@ -46,8 +46,9 @@ export const fetchSearchMovie = (searchTerm) => {
     try {
       dispatch({ type: FETCH_SEARCH_MOVIE })
       const request = await axios.get(
-        `/search/multi?api_key=${process.env.API_KEY}&language=en-US&include_adult=false&query=${searchTerm}`
+        `/search/movie?api_key=c22413846bd67d4a254755774966a82b&query=${searchTerm}`        
       )
+      console.log(request)
       dispatch({ type: FETCH_SEARCH_MOVIE_SUCCESS, payload: request })
     } catch (error) {
       dispatch({ type: FETCH_SEARCH_MOVIE_FAIL })

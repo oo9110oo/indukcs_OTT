@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { useScroll } from '../hook/useScroll'
 import { ReactComponent as SearchLogo } from '../static/images/search-icon.svg'
@@ -8,24 +8,26 @@ import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
 // import DropdownArrow from '../static/images/drop-down-arrow.svg'
 import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
 
-const Navbar = ({ history }) => {
+const Header = () => {
   const searchInput = React.useRef(null)
   const [userInput, setUserInput] = useState('')
-   const [scrollDimensions] = useScroll()
+  const [scrollDimensions] = useScroll()
   const { scrollY } = scrollDimensions
 
   const onChange = async (event) => {
     setUserInput(event.target.value)
   }
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (
       document.activeElement === searchInput.current &&
       userInput.length === 0
     ) {
-      history.push('/browse')
+      navigate('/')
     }
-    if (userInput.length > 0) history.push(`/search?q=${userInput}`)
+    if (userInput.length > 0) navigate(`/search?q=${userInput}`)
   }, [userInput, searchInput])
 
   const onLogoClick = () => {
@@ -76,4 +78,4 @@ const Navbar = ({ history }) => {
   )
 }
 
-export default Navbar
+export default Header

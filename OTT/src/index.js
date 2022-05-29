@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { createRoot } from 'react-dom/client';
+
+import { createStore, applyMiddleware } from 'redux'
+import reducers from './store/reducers'
+import ReduxThunk from 'redux-thunk'
 
 import App from './App'
 
@@ -24,8 +29,17 @@ import './static/scss/style.scss'
 
 // ReactDOM.render(app, document.getElementById('app'))
 
-import { createRoot } from 'react-dom/client';
-const container = document.getElementById('app');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<App />);
+const store = createStore(reducers, applyMiddleware(ReduxThunk))
+
+const app = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+  
+ReactDOM.render(app, document.getElementById('app'))
+
+//const container = document.getElementById('app');
+//const root = createRoot(container); // createRoot(container!) if you use TypeScript
+//root.render(<App />);
 // root.render(app);
