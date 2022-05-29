@@ -1,4 +1,5 @@
 import axios from '../../axios-movies'
+import dummy from "../../db/data.json"
 
 export const FETCH_TRENDING = 'FETCH_TRENDING'
 export const FETCH_NETFLIX_ORIGINALS = 'FETCH_NETFLIX_ORIGINALS'
@@ -17,10 +18,12 @@ export const FETCH_SEARCH_MOVIE = 'FETCH_SEARCH_MOVIE'
 export const FETCH_SEARCH_MOVIE_FAIL = 'FETCH_SEARCH_MOVIE_FAIL'
 export const FETCH_SEARCH_MOVIE_SUCCESS = 'FETCH_SEARCH_MOVIE_SUCCESS'
 
+
 const media_type = {
   tv: 'tv',
   movie: 'movie',
 }
+const API_KEY = "c22413846bd67d4a254755774966a82b";
 
 export const fetchMovieDetails = (mediaType, mediaId) => {
   return async (dispatch) => {
@@ -28,9 +31,9 @@ export const fetchMovieDetails = (mediaType, mediaId) => {
       dispatch({ type: FETCH_MOVIE_DETAILS })
       let urlPath
       if (mediaType === media_type.movie)
-        urlPath = `/movie/${mediaId}?api_key=${process.env.API_KEY}`
+        urlPath = `/movie/${mediaId}?api_key=`+API_KEY
       if (mediaType === media_type.tv)
-        urlPath = `/tv/${mediaId}?api_key=${process.env.API_KEY}`
+        urlPath = `/tv/${mediaId}?api_key=`+API_KEY
 
       const request = await axios.get(urlPath)
       dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: request })
@@ -60,11 +63,7 @@ export const fetchSearchMovie = (searchTerm) => {
 export const fetchNetflixOriginals = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/tv?api_key=${process.env.API_KEY}&with_networks=213`
-      )
-
-      dispatch({ type: FETCH_NETFLIX_ORIGINALS, payload: request })
+      dispatch({ type: FETCH_NETFLIX_ORIGINALS, payload: dummy["NetflixOriginals"] })
     } catch (error) {
       console.log('error', error)
     }
@@ -74,10 +73,7 @@ export const fetchNetflixOriginals = () => {
 export const fetchTrending = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/trending/all/week?api_key=${process.env.API_KEY}&language=en-US`
-      )
-      dispatch({ type: FETCH_TRENDING, payload: request })
+      dispatch({ type: FETCH_TRENDING, payload: dummy["Trending"] })
     } catch (error) {}
   }
 }
@@ -85,10 +81,7 @@ export const fetchTrending = () => {
 export const fetchTopRated = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US`
-      )
-      dispatch({ type: FETCH_TOP_RATED, payload: request })
+      dispatch({ type: FETCH_TOP_RATED, payload: dummy["TopRated"] })
     } catch (error) {}
   }
 }
@@ -96,11 +89,7 @@ export const fetchTopRated = () => {
 export const fetchActionMovies = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/movie?api_key=${process.env.API_KEY}&with_genres=28`
-      )
-
-      dispatch({ type: FETCH_ACTION_MOVIES, payload: request })
+      dispatch({ type: FETCH_ACTION_MOVIES, payload: dummy["ActionMovies"] })
     } catch (error) {}
   }
 }
@@ -108,11 +97,7 @@ export const fetchActionMovies = () => {
 export const fetchComedyMovies = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/movie?api_key=${process.env.API_KEY}&with_genres=35`
-      )
-
-      dispatch({ type: FETCH_COMEDY_MOVIES, payload: request })
+      dispatch({ type: FETCH_COMEDY_MOVIES, payload: dummy["ComedyMovies"] })
     } catch (error) {}
   }
 }
@@ -120,10 +105,7 @@ export const fetchComedyMovies = () => {
 export const fetchHorrorMovies = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/movie?api_key=${process.env.API_KEY}&with_genres=27`
-      )
-      dispatch({ type: FETCH_HORROR_MOVIES, payload: request })
+      dispatch({ type: FETCH_HORROR_MOVIES, payload: dummy["HorrorMovies"] })
     } catch (error) {}
   }
 }
@@ -131,10 +113,7 @@ export const fetchHorrorMovies = () => {
 export const fetchRomanceMovies = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/movie?api_key=${process.env.API_KEY}&with_genres=10749`
-      )
-      dispatch({ type: FETCH_ROMANCE_MOVIES, payload: request })
+      dispatch({ type: FETCH_ROMANCE_MOVIES, payload: dummy["RomanceMovies"] })
     } catch (error) {}
   }
 }
@@ -142,10 +121,7 @@ export const fetchRomanceMovies = () => {
 export const fetchDocumentaries = () => {
   return async (dispatch) => {
     try {
-      const request = await axios.get(
-        `/discover/movie?api_key=${process.env.API_KEY}&with_genres=99`
-      )
-      dispatch({ type: FETCH_DOCUMENTARIES, payload: request })
+      dispatch({ type: FETCH_DOCUMENTARIES, payload: dummy["Documentaries"] })
     } catch (error) {}
   }
 }

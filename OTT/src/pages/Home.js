@@ -24,7 +24,7 @@ const Home = () => {
     <>
       <div className='main-content'>
 
-        <Body2 selectMovieHandler={selectMovieHandler} />
+        <Body selectMovieHandler={selectMovieHandler} />
         {/* <Body2 /> */}
 
       </div>

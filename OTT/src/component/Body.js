@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import * as movieActions from '../store/actions'
+import * as movieActions from '../store/actions'
 
 import MovieMain from './MovieMain'
 import MovieGroup from './MovieGroup'
@@ -18,17 +18,17 @@ const MainContent = ({ selectMovieHandler }) => {
 
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   dispatch(movieActions.fetchMovieDetails('tv', '63351'))
-  //   dispatch(movieActions.fetchNetflixOriginals())
-  //   dispatch(movieActions.fetchTrending())
-  //   dispatch(movieActions.fetchTopRated())
-  //   dispatch(movieActions.fetchActionMovies())
-  //   dispatch(movieActions.fetchComedyMovies())
-  //   dispatch(movieActions.fetchHorrorMovies())
-  //   dispatch(movieActions.fetchRomanceMovies())
-  //   dispatch(movieActions.fetchDocumentaries())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(movieActions.fetchMovieDetails('tv', '63351'))
+    dispatch(movieActions.fetchNetflixOriginals())
+    dispatch(movieActions.fetchTrending())
+    dispatch(movieActions.fetchTopRated())
+    dispatch(movieActions.fetchActionMovies())
+    dispatch(movieActions.fetchComedyMovies())
+    dispatch(movieActions.fetchHorrorMovies())
+    dispatch(movieActions.fetchRomanceMovies())
+    dispatch(movieActions.fetchDocumentaries())
+  }, [dispatch])
 
   return (
     <div className='container'>

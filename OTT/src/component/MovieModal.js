@@ -6,29 +6,27 @@ import PlayIcon from '../static/images/play-button.svg'
 const MovieDetails = ({
   movie: {
     title,
-    name,
     vote_average,
     release_date,
-    first_air_date,
-    runtime,
-    episode_run_time,
-    number_of_episodes,
-    number_of_seasons,
     overview,
   },
+
 }) => {
+  console.log(title);
+  console.log(vote_average);
+  console.log(release_date);
+  console.log(overview);
   return (
     <div className='modal__container'>
-      <h1 className='modal__title'>{title || name}</h1>
+      <h1 className='modal__title'>{title}</h1>
       <p className='modal__info'>
         <span className='modal__rating'>Rating: {vote_average * 10}% </span>
-        Release date: {release_date || first_air_date} Runtime:{' '}
-        {runtime || episode_run_time}m
+        Release date: {release_date} 
       </p>
-      <p className='modal__episode'>
+      {/* <p className='modal__episode'>
         {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
         {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
-      </p>
+      </p> */}
       <p className='modal__overview'>{overview}</p>
       <button className='modal__btn modal__btn--red'>
         <PlayIcon className='modal__btn--icon' />
