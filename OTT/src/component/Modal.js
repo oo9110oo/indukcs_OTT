@@ -14,11 +14,27 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const movieNumber = useRef(0);
 
   const addMovie = (movie) => {
-    movieNumber.current += 1;
-    setMovieInput([movie, ...movieInput])
+  
+    var flag = true;
+
+    if (movieNumber.current > 0 ) {
+      for (var i in movieInput) {
+        if (movieInput[i]['title'] == movie['title']) {
+          alert("이미 저장되어있습니다.");  
+          flag = false;        
+        } 
+      }    
+    }
+
+    if (flag) {
+      movieNumber.current += 1;
+      setMovieInput([movie, ...movieInput])
+    }
   }
 
-  console.log(movieInput);
+  for (var i in movieInput) {
+    console.log(movieInput[i]['title']);
+  }
 
   return (
       <div>
@@ -29,7 +45,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
             className={show ? 'modal show' : 'modal hide'}
           >
             <div className='modal__container'>
-              <h1 className='modal__title'>{children['props']['movie']['title']}</h1>
+              <h1 className='modal__title'>{children['props']['movie']['title'] || children['props']['movie']['name']}</h1>
               <p className='modal__info'>
                 <span className='modal__rating'>Rating: {children['props']['movie']['vote_average'] * 10}% </span>
                 Release date: {children['props']['movie']['release_date']} 
@@ -59,3 +75,4 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
 }
 
 export default Modal
+

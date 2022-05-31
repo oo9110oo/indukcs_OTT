@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import * as movieAddList from '../component/Modal'
 
-const MovieList = ( { movieAddList }) => {
 
-    
-console.log(movieAddList);
 
+const MovieList = () => {
+    const dispatch = useDispatch()
+    //console.log(dispatch(movieAddList.movieList()));
+    console.log(useSelector((state) => state.movieList));
   return (
      <div className='modal__container'>
        {/* <h1 className='modal__title'>{title}</h1>
