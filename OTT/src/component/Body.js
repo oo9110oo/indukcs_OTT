@@ -19,7 +19,7 @@ const MainContent = ({ selectMovieHandler }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(movieActions.fetchMovieDetails('tv', '63351'))
+    dispatch(movieActions.fetchMovieDetails('movie', '284052'))
     dispatch(movieActions.fetchNetflixOriginals())
     dispatch(movieActions.fetchTrending())
     dispatch(movieActions.fetchTopRated())

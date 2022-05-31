@@ -28,15 +28,18 @@ const API_KEY = "c22413846bd67d4a254755774966a82b";
 export const fetchMovieDetails = (mediaType, mediaId) => {
   return async (dispatch) => {
     try {
+      
       dispatch({ type: FETCH_MOVIE_DETAILS })
-      let urlPath
-      if (mediaType === media_type.movie)
-        urlPath = `/movie/${mediaId}?api_key=`+API_KEY
-      if (mediaType === media_type.tv)
-        urlPath = `/tv/${mediaId}?api_key=`+API_KEY
+      //let urlPath
+      //if (mediaType === media_type.movie)
+      //  urlPath = `/movie/${mediaId}?api_key=`+API_KEY
+      //if (mediaType === media_type.tv)
+      //  urlPath = `/tv/${mediaId}?api_key=`+API_KEY
 
-      const request = await axios.get(urlPath)
-      dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: request })
+      //const request = await axios.get(urlPath)
+      //console.log(dummy["MovieDetails"])
+      //console.log(request.data)
+      dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: dummy["MovieDetails"] })
     } catch (error) {
       console.log('error', error)
       dispatch({ type: FETCH_MOVIE_DETAILS_FAIL })

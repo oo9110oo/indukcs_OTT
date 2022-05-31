@@ -6,13 +6,13 @@ import { ReactComponent as MuteIcon } from '../static/images/mute.svg'
 import { ReactComponent as UnmuteIcon } from '../static/images/unmute.svg'
 import ReactPlayer from 'react-player'
 
-// const Moviemain = ({ movie: { name, overview } }) => {
+ const Moviemain = ({ movie: { title, overview } }) => {
   
-const Moviemain = () => {
+//const Moviemain = () => {
   const [isMuted, setIsMuted] = useState(true)
 
   return (
-    <div className='MovieMain'>
+    <div className='header'>
       <ReactPlayer
         playing={true}
         loop={true}
@@ -23,7 +23,7 @@ const Moviemain = () => {
         className='header__video'
         url='https://vimeo.com/636702859'
       />
-      <h1 className='header__container-heading'>Docter Strange</h1>
+      <h1 className='header__container-heading'>{title}</h1>
       <button
         onClick={() => alert('not a movie!')}
         className='header__container-btnPlay'
@@ -47,7 +47,7 @@ const Moviemain = () => {
           className='header__container-btnVolume'
         />
       )}
-      <p className='header__container-overview'>Overview</p>
+      <p className='header__container-overview'>{overview}</p>
       <div className='header__container--fadeBottom'></div>
     </div>
   )
