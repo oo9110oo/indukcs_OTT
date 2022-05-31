@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import Backdrop from '../component/Backdrop'
-import AddIcon from '../static/images/add.svg'
-import PlayIcon from '../static/images/play-button.svg'
+import { ReactComponent as AddLogo } from '../static/images/add.svg'
+import { ReactComponent as PlayLogo } from '../static/images/play-button.svg'
 
 const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const backgroundStyle = {
@@ -9,8 +9,16 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
     backgroundImage: `url(https://image.tmdb.org/t/p/original/${backgroundImage})`,
   }
 
-  console.log(children)
-  
+  const [movieInput, setMovieInput] = useState([]);
+
+  const movieNumber = useRef(0);
+
+  const addMovie = (movie) => {
+    movieNumber.current += 1;
+    setMovieInput([movie, ...movieInput])
+  }
+
+  console.log(movieInput);
 
   return (
       <div>
@@ -32,11 +40,14 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
               </p> */}
               <p className='modal__overview'>{children['props']['movie']['overview']}</p>
               <button className='modal__btn modal__btn--red'>
-                {/* <PlayIcon className='modal__btn--icon' /> */}
+                <PlayLogo className='header__container-btnMyList-play' />
                 Play
               </button>
-              <button className='modal__btn'>
-                {/* <AddIcon className='modal__btn--icon' /> */}
+              <button  className='modal__btn'
+                onClick={ () => { 
+                  alert("My List에 저장했습니다")  
+                  addMovie(children['props']['movie']) } }>
+                <AddLogo className='header__container-btnMyList-add' />
                 My List
               </button>
             </div>

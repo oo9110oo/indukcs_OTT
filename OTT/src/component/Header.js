@@ -7,6 +7,7 @@ import DuckingLogo from '../static/images/Netflix_Logo_RGB.png'
 import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
 // import DropdownArrow from '../static/images/drop-down-arrow.svg'
 import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
+import MoiveList from './MovieList'
 
 const Header = () => {
   const searchInput = React.useRef(null)
@@ -53,7 +54,10 @@ const Header = () => {
         <div className='navigation__container-link pseudo-link'>
           Recently Added
         </div>
-        <div className='navigation__container-link pseudo-link'>My List</div>
+        <div className='navigation__container-link pseudo-link'
+          // onClick={MoiveList()}
+        >          
+          My List</div>
 
         <div className='navigation__container--left'>
           <SearchLogo className='logo' />

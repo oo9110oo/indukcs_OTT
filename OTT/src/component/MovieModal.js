@@ -12,10 +12,6 @@ const MovieDetails = ({
   },
 
 }) => {
-  console.log(title);
-  console.log(vote_average);
-  console.log(release_date);
-  console.log(overview);
   return (
     <div className='modal__container'>
       <h1 className='modal__title'>{title}</h1>
@@ -23,10 +19,6 @@ const MovieDetails = ({
         <span className='modal__rating'>Rating: {vote_average * 10}% </span>
         Release date: {release_date} 
       </p>
-      {/* <p className='modal__episode'>
-        {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
-        {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
-      </p> */}
       <p className='modal__overview'>{overview}</p>
       <button className='modal__btn modal__btn--red'>
         <PlayIcon className='modal__btn--icon' />
