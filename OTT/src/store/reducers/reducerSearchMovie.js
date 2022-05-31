@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
     case FETCH_SEARCH_MOVIE_FAIL:
       return { ...state, isLoading: false }
     case FETCH_SEARCH_MOVIE_SUCCESS:
-      const searchResults = action.payload.data.results
+      const searchResults = action.payload
       return { ...state, searchResults, isLoading: false }
     default:
       return state

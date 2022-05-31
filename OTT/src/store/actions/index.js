@@ -50,12 +50,25 @@ export const fetchMovieDetails = (mediaType, mediaId) => {
 export const fetchSearchMovie = (searchTerm) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: FETCH_SEARCH_MOVIE })
-      const request = await axios.get(
-        `/search/movie?api_key=c22413846bd67d4a254755774966a82b&query=${searchTerm}`        
-      )
-      console.log(request)
-      dispatch({ type: FETCH_SEARCH_MOVIE_SUCCESS, payload: request })
+      // dispatch({ type: FETCH_SEARCH_MOVIE })
+      // const request = await axios.get(
+      //   `/search/movie?api_key=c22413846bd67d4a254755774966a82b&query=${searchTerm}`        
+      // )
+      //dispatch({ type: FETCH_SEARCH_MOVIE_SUCCESS, payload: request.data.results })
+      
+      var unionDummy = [];
+      for(var key in dummy) {
+        if(dummy[key]["searchTarget"]){
+          unionDummy = unionDummy.concat(dummy[key]["results"])
+        }
+      }
+      var resultData = [];
+      for(var index in unionDummy) {
+        if(JSON.stringify(unionDummy[index]).toUpperCase().indexOf(searchTerm.toUpperCase()) != -1) {
+          resultData = resultData.concat(unionDummy[index]);
+        }
+      }
+      dispatch({ type: FETCH_SEARCH_MOVIE_SUCCESS, payload: resultData })
     } catch (error) {
       dispatch({ type: FETCH_SEARCH_MOVIE_FAIL })
       console.log('error', error)
