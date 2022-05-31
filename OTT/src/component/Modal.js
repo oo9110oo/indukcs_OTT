@@ -16,6 +16,8 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const addMovie = (movie) => {
     movieNumber.current += 1;
     setMovieInput([movie, ...movieInput])
+    localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
+    localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
   }
 
   console.log(movieInput);
@@ -37,8 +39,15 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
               {/* <p className='modal__episode'>
                 {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
                 {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
-              </p> */}
+              </p> */}              
               <p className='modal__overview'>{children['props']['movie']['overview']}</p>
+              <p className='modal__overview'>myList 만들기 전 임시 내용 내용내용내용내용</p>
+              <p className='modal__overview'>제목 : {JSON.parse(localStorage.getItem(0))[0]}</p>
+              <p className='modal__overview'>Release date : {JSON.parse(localStorage.getItem(0))[1]}</p>
+              <p className='modal__overview'>소개 : {JSON.parse(localStorage.getItem(0))[2]}</p>
+              <p className='modal__overview'>제목 : {JSON.parse(localStorage.getItem(1))[0]}</p>
+              <p className='modal__overview'>Release date : {JSON.parse(localStorage.getItem(1))[1]}</p>
+              <p className='modal__overview'>소개 : {JSON.parse(localStorage.getItem(1))[2]}</p>              
               <button className='modal__btn modal__btn--red'>
                 <PlayLogo className='header__container-btnMyList-play' />
                 Play
