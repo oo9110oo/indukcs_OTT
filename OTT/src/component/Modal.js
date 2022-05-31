@@ -18,9 +18,27 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
     setMovieInput([movie, ...movieInput])
     localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
     localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
+  
+    var flag = true;
+
+    if (movieNumber.current > 0 ) {
+      for (var i in movieInput) {
+        if (movieInput[i]['title'] == movie['title']) {
+          alert("이미 저장되어있습니다.");  
+          flag = false;        
+        } 
+      }    
+    }
+
+    if (flag) {
+      movieNumber.current += 1;
+      setMovieInput([movie, ...movieInput])
+    }
   }
 
-  console.log(movieInput);
+  for (var i in movieInput) {
+    console.log(movieInput[i]['title']);
+  }
 
   return (
       <div>
@@ -31,7 +49,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
             className={show ? 'modal show' : 'modal hide'}
           >
             <div className='modal__container'>
-              <h1 className='modal__title'>{children['props']['movie']['title']}</h1>
+              <h1 className='modal__title'>{children['props']['movie']['title'] || children['props']['movie']['name']}</h1>
               <p className='modal__info'>
                 <span className='modal__rating'>Rating: {children['props']['movie']['vote_average'] * 10}% </span>
                 Release date: {children['props']['movie']['release_date']} 
@@ -42,12 +60,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
               </p> */}              
               <p className='modal__overview'>{children['props']['movie']['overview']}</p>
               <p className='modal__overview'>myList 만들기 전 임시 내용 내용내용내용내용</p>
-              <p className='modal__overview'>제목 : {JSON.parse(localStorage.getItem(0))[0]}</p>
-              <p className='modal__overview'>Release date : {JSON.parse(localStorage.getItem(0))[1]}</p>
-              <p className='modal__overview'>소개 : {JSON.parse(localStorage.getItem(0))[2]}</p>
-              <p className='modal__overview'>제목 : {JSON.parse(localStorage.getItem(1))[0]}</p>
-              <p className='modal__overview'>Release date : {JSON.parse(localStorage.getItem(1))[1]}</p>
-              <p className='modal__overview'>소개 : {JSON.parse(localStorage.getItem(1))[2]}</p>              
+                       
               <button className='modal__btn modal__btn--red'>
                 <PlayLogo className='header__container-btnMyList-play' />
                 Play

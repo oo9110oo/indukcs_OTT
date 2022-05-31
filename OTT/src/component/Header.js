@@ -55,7 +55,7 @@ const Header = () => {
           Recently Added
         </div>
         <div className='navigation__container-link pseudo-link'
-          // onClick={MoiveList()}
+          onClick={() => MoiveList()}
         >          
           My List</div>
 
@@ -71,12 +71,12 @@ const Header = () => {
           />
         </div>
 
-        <div className='navigation__container-link pseudo-link'>KIDS</div>
-        <div className='navigation__container-link pseudo-link'>DVD</div>
-        <BellLogo className='navigation__container--bellLogo' />
+        {/* <div className='navigation__container-link pseudo-link'>KIDS</div>
+        <div className='navigation__container-link pseudo-link'>DVD</div> */}
+        {/* <BellLogo className='navigation__container--bellLogo' /> */}
 
         {/* <DropdownContent /> */}
-        <DropdownArrow className='navigation__container--downArrow' />
+        {/* <DropdownArrow className='navigation__container--downArrow' /> */}
       </ul>
     </nav>
   )
