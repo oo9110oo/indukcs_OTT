@@ -29,17 +29,36 @@ export const fetchMovieDetails = (mediaType, mediaId) => {
   return async (dispatch) => {
     try {
       
-      dispatch({ type: FETCH_MOVIE_DETAILS })
-      //let urlPath
-      //if (mediaType === media_type.movie)
-      //  urlPath = `/movie/${mediaId}?api_key=`+API_KEY
-      //if (mediaType === media_type.tv)
-      //  urlPath = `/tv/${mediaId}?api_key=`+API_KEY
+      // dispatch({ type: FETCH_MOVIE_DETAILS })
+      // //let urlPath
+      // //if (mediaType === media_type.movie)
+      // //  urlPath = `/movie/${mediaId}?api_key=`+API_KEY
+      // //if (mediaType === media_type.tv)
+      // //  urlPath = `/tv/${mediaId}?api_key=`+API_KEY
 
-      //const request = await axios.get(urlPath)
-      //console.log(dummy["MovieDetails"])
-      //console.log(request.data)
-      dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: dummy["MovieDetails"] })
+      // //const request = await axios.get(urlPath)
+      // //console.log(dummy["MovieDetails"])
+      // //console.log(request.data)
+      // dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: dummy["MovieDetails"] })
+
+
+      var unionDummy = [];
+      for(var key in dummy) {
+        if(dummy[key]["searchTarget"]){
+          unionDummy = unionDummy.concat(dummy[key]["results"])
+        }
+      }
+      var resultData = [];
+      for(var index in unionDummy) {
+        if(unionDummy[index]["id"] == mediaId){//unionDummy[index]["media_type"] == mediaType && 
+          resultData = resultData.concat(unionDummy[index]);
+        }
+      }
+      if(resultData.length > 0){
+        dispatch({ type: FETCH_MOVIE_DETAILS_SUCCESS, payload: resultData[0] })
+      } else {
+        dispatch({ type: FETCH_MOVIE_DETAILS_FAIL })
+      }
     } catch (error) {
       console.log('error', error)
       dispatch({ type: FETCH_MOVIE_DETAILS_FAIL })
