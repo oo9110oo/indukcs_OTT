@@ -7,7 +7,7 @@ import DuckingLogo from '../static/images/Netflix_Logo_RGB.png'
 import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
 // import DropdownArrow from '../static/images/drop-down-arrow.svg'
 import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
-import MoiveList from './MovieList'
+import MovieList from './MovieList'
 import BodyBlackoutStyle from './BodyBlackOutStyle'
 
 import { useViewport } from '../hook/useViewport'
@@ -21,8 +21,9 @@ const Header = () => {
   const [isVisible, setModalVisible] = useState(false);
   const onModalVisible = (active) => {
     setModalVisible(active);
-
+    
     console.log(active);
+    
   }
 
   const onChange = async (event) => {
@@ -31,7 +32,7 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => {    
     if (
       document.activeElement === searchInput.current &&
       userInput.length === 0
@@ -65,11 +66,11 @@ const Header = () => {
           Recently Added
         </div>
         <div className='navigation__container-link pseudo-link'
-          onClick={() => onModalVisible(true)}
+          onClick={() => onModalVisible(true)}          
         >          
         {isVisible && <BodyBlackoutStyle onModalVisible={onModalVisible} />}
         {isVisible && (
-          <MoiveList setModalVisible={setModalVisible} />
+          <MovieList setModalVisible={setModalVisible} />
         )}
           My List</div>
 

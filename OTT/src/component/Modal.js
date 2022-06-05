@@ -14,27 +14,34 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const movieNumber = useRef(0);
 
   const addMovie = (movie) => {
-    movieNumber.current += 1;
-    setMovieInput([movie, ...movieInput])
-    localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
-    //localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
-    localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']]))    
-  
-    var flag = true;
+    let movies = localStorage.getItem('list');
+    var check = true;
+    localStorage.setItem('checkMovie', JSON.stringify([children['props']['movie']]))
+    if(movies != null){
+      for (let i = 0; i <= movies; i++) {
+        if(JSON.parse(localStorage.getItem('checkMovie'))[0]['backdrop_path'] == JSON.parse(localStorage.getItem(i))[0]['backdrop_path']){
+          check = false;
+        }      
+      }
+    }    
 
-    if (movieNumber.current > 0 ) {
-      for (var i in movieInput) {
-        if (movieInput[i]['title'] == movie['title']) {
-          alert("이미 저장되어있습니다.");  
-          flag = false;        
-        } 
-      }    
-    }
-
-    if (flag) {
+    if(check == true) {
       movieNumber.current += 1;
       setMovieInput([movie, ...movieInput])
+      localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
+      //localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
+      localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']]))    
+    
+      var flag = true;      
+
+      if (flag) {
+        movieNumber.current += 1;
+        setMovieInput([movie, ...movieInput])
+      }
+
+      alert("My List에 저장했습니다")  
     }
+    else alert("이미 My List에 있는 영화입니다.")
   }
 
   for (var i in movieInput) {
@@ -59,16 +66,14 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
                 {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
                 {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
               </p> */}              
-              <p className='modal__overview'>{children['props']['movie']['overview']}</p>
-              <p className='modal__overview'>myList 만들기 전 임시 내용 내용내용내용내용</p>
+              <p className='modal__overview'>{children['props']['movie']['overview']}</p>              
                        
               <button className='modal__btn modal__btn--red'>
                 <PlayLogo className='header__container-btnMyList-play' />
                 Play
               </button>
               <button  className='modal__btn'
-                onClick={ () => { 
-                  alert("My List에 저장했습니다")  
+                onClick={ () => {                   
                   addMovie(children['props']['movie']) } }>
                 <AddLogo className='header__container-btnMyList-add' />
                 My List
