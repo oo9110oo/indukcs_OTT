@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as movieAddList from '../component/Modal'
-
-
+import "../static/scss/movieList.scss"
 
 const MovieList = () => {
-    const dispatch = useDispatch()
-    //console.log(dispatch(movieAddList.movieList()));
-    console.log(useSelector((state) => state.movieList));
+  
+
+const rendering = () => {
+  let movies = localStorage.getItem('list');
+  console.log(movies);
+  const result = [];
+  for (let i = 0; i <= movies; i++) {
+    console.log("???");
+    const title = JSON.parse(localStorage.getItem(i))[0]['title']
+    const imagePath = 'https://image.tmdb.org/t/p/original/' + JSON.parse(localStorage.getItem(i))[0]['backdrop_path'];
+    console.log(imagePath);
+
+    result.push(<div key={title}>
+    <img className='movieShowcase__container--movie-image' src={imagePath} style={{width:'200px'}} />
+                <h5 className='movieName'>{title}</h5>
+                </div>
+    );
+  }
+  return result;
+};
+
+
+
   return (
-     <div className='modal__container'>
-       {/* <h1 className='modal__title'>{title}</h1>
-       <p className='modal__info'>
-         <span className='modal__rating'>Rating: {vote_average * 10}% </span>
-         Release date: {release_date} 
-       </p>
-       <p className='modal__overview'>{overview}</p>       */}
+     <div className='detail-menu-modal'>
+       <h1 className='modal__title'>My List</h1>         
+      <div style={{display:'flex'}}>{rendering()}</div>
     </div>
   )
 }

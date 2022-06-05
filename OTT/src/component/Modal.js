@@ -17,7 +17,8 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
     movieNumber.current += 1;
     setMovieInput([movie, ...movieInput])
     localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
-    localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
+    //localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
+    localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']]))    
   
     var flag = true;
 

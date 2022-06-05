@@ -8,12 +8,22 @@ import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
 // import DropdownArrow from '../static/images/drop-down-arrow.svg'
 import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
 import MoiveList from './MovieList'
+import BodyBlackoutStyle from './BodyBlackOutStyle'
+
+import { useViewport } from '../hook/useViewport'
 
 const Header = () => {
   const searchInput = React.useRef(null)
   const [userInput, setUserInput] = useState('')
   const [scrollDimensions] = useScroll()
   const { scrollY } = scrollDimensions
+
+  const [isVisible, setModalVisible] = useState(false);
+  const onModalVisible = (active) => {
+    setModalVisible(active);
+
+    console.log(active);
+  }
 
   const onChange = async (event) => {
     setUserInput(event.target.value)
@@ -55,8 +65,12 @@ const Header = () => {
           Recently Added
         </div>
         <div className='navigation__container-link pseudo-link'
-          onClick={() => MoiveList()}
+          onClick={() => onModalVisible(true)}
         >          
+        {isVisible && <BodyBlackoutStyle onModalVisible={onModalVisible} />}
+        {isVisible && (
+          <MoiveList setModalVisible={setModalVisible} />
+        )}
           My List</div>
 
         <div className='navigation__container--left'>
