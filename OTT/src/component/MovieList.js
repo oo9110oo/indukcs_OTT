@@ -11,7 +11,7 @@ const rendering = () => {
     result.push(<div>
       <h3>myList가 비어있습니다.</h3>
     </div>)
-    return 
+    return result;
   } else {
     
   for (let i = 0; i <= movies; i++) {
