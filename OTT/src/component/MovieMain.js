@@ -25,15 +25,11 @@ import ReactPlayer from 'react-player'
       />
       <h1 className='header__container-heading'>{title}</h1>
       <button
-        onClick={() => alert('not a movie!')}
+        onClick={() => window.location.href = "https://youtu.be/mI9oyFMUlfg"}
         className='header__container-btnPlay'
       >
         <PlayLogo className='header__container-btnMyList-play' />
         Play
-      </button>
-      <button className='header__container-btnMyList'>
-        <AddLogo className='header__container-btnMyList-add' />
-        My List
       </button>
 
       {isMuted ? (
