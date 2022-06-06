@@ -13,9 +13,9 @@ const MovieList = () => {
       return result;
     } else {
       for (let i = 0; i <= movies; i++) {
-        const title = JSON.parse(localStorage.getItem(i))[0]['title']
+        const title = JSON.parse(localStorage.getItem(i))[0]['title'] || JSON.parse(localStorage.getItem(i))[0]['name'];
         const imagePath = 'https://image.tmdb.org/t/p/original/' + JSON.parse(localStorage.getItem(i))[0]['backdrop_path'];
-        result.push(<div key={title}>
+        result.push(<div className='addMovieList' key={title}>
           <img className='movieShowcase__container--movie-image' src={imagePath} style={{width:'200px'}} />
           <h5 className='movieName'>{title}</h5>
           </div>
@@ -32,8 +32,10 @@ const MovieList = () => {
     return (
       <div className='detail-menu-modal'>
         
-        <h1 className='modal__title'>My List</h1>              
-        <div className='imageList'>{rendering()}</div>
+        <h3 className='modal__title'>My List</h3>    
+        <div>          
+          <div className='imageList'>{rendering()}</div>
+        </div>          
         
       </div>
     )

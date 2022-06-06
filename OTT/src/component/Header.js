@@ -67,13 +67,14 @@ const Header = () => {
         </div>
         <div className='navigation__container-link pseudo-link'
           onClick={() => onModalVisible(true)}          
-        >          
+        >                  
+          My List</div>
+        <div>
         {isVisible && <BodyBlackoutStyle onModalVisible={onModalVisible} />}
         {isVisible && (
           <MovieList setModalVisible={setModalVisible} />
         )}
-          My List</div>
-
+        </div>
         <div className='navigation__container--left'>
           <SearchLogo className='logo' />
           <input

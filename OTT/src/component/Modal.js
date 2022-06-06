@@ -44,10 +44,6 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
     else alert("이미 My List에 있는 영화입니다.")
   }
 
-  for (var i in movieInput) {
-    console.log(movieInput[i]['title']);
-  }
-
   return (
       <div>
           <div>
