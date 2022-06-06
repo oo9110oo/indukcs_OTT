@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 import { useScroll } from '../hook/useScroll'
 import { ReactComponent as SearchLogo } from '../static/images/search-icon.svg'
-import DuckingLogo from '../static/images/Netflix_Logo_RGB.png'
+import DuckingLogo from '../static/images/ducking_full.png'
 import { ReactComponent as BellLogo } from '../static/images/bell-logo.svg'
 // import DropdownArrow from '../static/images/drop-down-arrow.svg'
 import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arrow.svg'
@@ -21,9 +21,6 @@ const Header = () => {
   const [isVisible, setModalVisible] = useState(false);
   const onModalVisible = (active) => {
     setModalVisible(active);
-    
-    console.log(active);
-    
   }
 
   const onChange = async (event) => {
@@ -46,6 +43,10 @@ const Header = () => {
     setUserInput('')
   }
 
+  const goHome = () => {
+    window.location.href = "/"
+  }
+
 //  console.log(DropdownArrow)
   return (
     <nav className={'navigation ' + (scrollY > 50 ? 'black' : '')}>
@@ -59,12 +60,17 @@ const Header = () => {
         </NavLink>
         <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
         {/* <img src="{DropdownArrow}" alt="DropdownArrow" /> */}
-        <div className='navigation__container-link pseudo-link'>Home</div>
-        <div className='navigation__container-link pseudo-link'>Movies</div>
-        <div className='navigation__container-link pseudo-link'>TV</div>
-        <div className='navigation__container-link pseudo-link'>
-          Recently Added
-        </div>
+        <div className='navigation__container-link pseudo-link'
+        onClick={() => goHome()}
+        >Home</div>
+        <div className='navigation__container-link pseudo-link'><a href='#Netflix Originals'>Netflix</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Trending'>Trending</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Top Rated'>Top Rated</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Action Movies'>Action Movies</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Comedy'>Comedy</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Horror Movies'>Horror Movies</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Romance'>Romance</a></div>
+        <div className='navigation__container-link pseudo-link'><a href='#Documentaries'>Documentaries</a></div>
         <div className='navigation__container-link pseudo-link'
           onClick={() => onModalVisible(true)}          
         >                  

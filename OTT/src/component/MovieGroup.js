@@ -13,7 +13,7 @@ const DisplayMovieRow = ({ title, isNetflixMovies, movies, selectMovieHandler })
 
   return (
     <>
-      <h1 className='movieShowcase__heading'>{title}</h1>
+      <h1 className='movieShowcase__heading' id={title}>{title}</h1>
       <Swiper
         className='movieShowcase__container'
         navigation={true}
@@ -56,7 +56,7 @@ const DisplayMovieRow = ({ title, isNetflixMovies, movies, selectMovieHandler })
             if (movie.poster_path && movie.backdrop_path !== null) {
               return (
                 <SwiperSlide
-                  onClick={() => selectMovieHandler(movie)}
+                  onClick={() => selectMovieHandler(movie)}                  
                   key={idx}
                   className={
                     'movieShowcase__container--movie' +
