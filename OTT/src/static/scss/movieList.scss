@@ -42,6 +42,7 @@
 .addMovieList {
   display:inline-grid; 
   margin-left:60px;
+  position: relative;
 }
 
 .movieName {
@@ -54,4 +55,27 @@
   margin-left : 10px;
   color : white;  
   font-size: 3rem !important;
+}
+
+.deleteIcon {
+  width : 20px;
+  height: 20px;
+  position : absolute;
+  right: 0%;    
+  background-color: #000;
+}
+
+.deleteIcon:before, .deleteIcon:after {
+  position: absolute;  
+  content: ' ';
+  top: -10%;  
+  height: 20px;
+  width: 2px;
+  background-color: #FFF;
+}
+.deleteIcon:before {
+  transform: rotate(45deg);
+}
+.deleteIcon:after {
+  transform: rotate(-45deg);
 }

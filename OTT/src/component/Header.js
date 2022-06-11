@@ -94,7 +94,7 @@ const Header = () => {
         </div>
 
         {/* <div className='navigation__container-link pseudo-link'>KIDS</div>
-        <div className='navigation__container-link pseudo-link'>DVD</div> */}
+        <div className='navigation__container-link pseudo-link'>DVD</div> }
         {/* <BellLogo className='navigation__container--bellLogo' /> */}
 
         {/* <DropdownContent /> */}

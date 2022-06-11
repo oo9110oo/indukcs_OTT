@@ -14,14 +14,16 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const movieNumber = useRef(0);
 
   const addMovie = (movie) => {
-    let movies = localStorage.getItem('list');
-    var check = true;
-    localStorage.setItem('checkMovie', JSON.stringify([children['props']['movie']]))
-    if(movies != null){
+    let movies = localStorage.getItem('list'); // movieList에 저장된 영화 개수
+    var check = true; // 이미 저장된 영화인지 확인용 변수
+    localStorage.setItem('checkMovie', JSON.stringify([children['props']['movie']])) // 저장된 영화인지 확인하기 위한 임시 저장
+    if(movies != null){ // 저장된 영화인지 확인
       for (let i = 0; i <= movies; i++) {
-        if(JSON.parse(localStorage.getItem('checkMovie'))[0]['backdrop_path'] == JSON.parse(localStorage.getItem(i))[0]['backdrop_path']){
-          check = false;
-        }      
+        if(localStorage.getItem(i) != null) {
+          if(JSON.parse(localStorage.getItem('checkMovie'))[0]['backdrop_path'] == JSON.parse(localStorage.getItem(i))[0]['backdrop_path']){
+            check = false;
+          }
+        }
       }
     }    
 
