@@ -8,15 +8,15 @@ const MovieList = () => {
       localStorage.removeItem(e)      
       window.location.reload(); // 새로고침. 새로고침 안하면 화면이 그대로 남아있어서
     }
-    
   }
 
   const rendering = () => {
     let movies = localStorage.getItem('list'); // myList에 저장된 영상 개수
     const result = [];
+    let resultCnt = 0;
     if (movies == null) {
       result.push(<div>
-        <h3>myList가 비어있습니다.</h3>
+        <h3 style={{color: 'white'}}>myList가 비어있습니다.</h3>
       </div>)
       return result;
     } else {
@@ -31,10 +31,16 @@ const MovieList = () => {
             <h5 className='movieName'>{title}</h5>
             </div>
           );
+          resultCnt++;
         }
       }
-      
-    return result;
+      if(resultCnt == 0) {
+        result.push(<div>
+          <h3 style={{color: 'white'}}>myList가 비어있습니다.</h3>
+        </div>)
+      }
+
+      return result;
     }
     
   };
