@@ -191,6 +191,85 @@ export default function (state = {}, action) {
 ```
  - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
 
+- 영화 상세보기 (모달창)   
+
+ ![Alt_text](/image/modal.png)
+
+ - MoiveGroup.js
+``` javascript
+{movies &&
+          movies.map((movie, idx) => {
+            let movieImageUrl = isNetflixMovies
+              ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+              : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+
+            if (movie.poster_path && movie.backdrop_path !== null) {
+              return (
+                <SwiperSlide
+                  onClick={() => selectMovieHandler(movie)}                  
+                  key={idx}
+                  className={
+                    'movieShowcase__container--movie' +
+                    (isNetflixMovies ? '__netflix' : '')
+                  }
+                >
+                  <img
+                    src={movieImageUrl}
+                    className='movieShowcase__container--movie-image'
+                  />
+                </SwiperSlide>
+              )
+            }
+          })}
+```
+ - 메인화면에서 Moive를 클릭하면 selectMovieHandler() 함수로 영화 정보를 보내 Modal창을 호출하게 됩니다.
+
+ - Modal.js
+
+ ``` javascript
+const Modal = ({ show, modalClosed, children, backgroundImage }) => {
+  const backgroundStyle = {
+    backgroundSize: 'cover',
+    backgroundImage: `url(https://image.tmdb.org/t/p/original/${backgroundImage})`,
+  }
+  return (
+      <div>
+          <div>
+          <Backdrop show={show} toggleBackdrop={modalClosed} />
+          <div
+            style={backgroundStyle}
+            className={show ? 'modal show' : 'modal hide'}
+          >
+            <div className='modal__container'>
+              <h1 className='modal__title'>{children['props']['movie']['title'] || children['props']['movie']['name']}</h1>
+              <p className='modal__info'>
+                <span className='modal__rating'>Rating: {children['props']['movie']['vote_average'] * 10}% </span>
+                Release date: {children['props']['movie']['release_date']} 
+              </p>
+              {/* <p className='modal__episode'>
+                {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
+                {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
+              </p> */}              
+              <p className='modal__overview'>{children['props']['movie']['overview']}</p>              
+                       
+              <button className='modal__btn modal__btn--red'>
+                <PlayLogo className='header__container-btnMyList-play' />
+                Play
+              </button>
+              <button  className='modal__btn'
+                onClick={ () => {                   
+                  addMovie(children['props']['movie']) } }>
+                <AddLogo className='header__container-btnMyList-add' />
+                My List
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  )
+ ```
+ - Moive의 정보를 받아 출력하는 코드 입니다.
+
  - 마이리스트
  ![Alt text](/image/마이리스트_추가.PNG)
  ![Alt text](/image/마이리스트_중복.PNG)
@@ -323,82 +402,3 @@ export default MovieList
  - 영화의 사진 오른쪽 상단에 X 버튼을 클릭시 삭제가 가능합니다.
  - X 버튼의 value에 영화의 key를 저장한 후 버튼 클릭시 value값을 listDelete 에 보내서 삭제를 수행합니다.
  - 삭제가 완료되면 창을 새로고침하게 됩니다.
-
- - 영화 상세보기 (모달창)   
-
- ![Alt_text](/image/modal.png)
-
- - MoiveGroup.js
-``` javascript
-{movies &&
-          movies.map((movie, idx) => {
-            let movieImageUrl = isNetflixMovies
-              ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-              : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-
-            if (movie.poster_path && movie.backdrop_path !== null) {
-              return (
-                <SwiperSlide
-                  onClick={() => selectMovieHandler(movie)}                  
-                  key={idx}
-                  className={
-                    'movieShowcase__container--movie' +
-                    (isNetflixMovies ? '__netflix' : '')
-                  }
-                >
-                  <img
-                    src={movieImageUrl}
-                    className='movieShowcase__container--movie-image'
-                  />
-                </SwiperSlide>
-              )
-            }
-          })}
-```
- - 메인화면에서 Moive를 클릭하면 selectMovieHandler() 함수로 영화 정보를 보내 Modal창을 호출하게 됩니다.
-
- - Modal.js
-
- ``` javascript
-const Modal = ({ show, modalClosed, children, backgroundImage }) => {
-  const backgroundStyle = {
-    backgroundSize: 'cover',
-    backgroundImage: `url(https://image.tmdb.org/t/p/original/${backgroundImage})`,
-  }
-  return (
-      <div>
-          <div>
-          <Backdrop show={show} toggleBackdrop={modalClosed} />
-          <div
-            style={backgroundStyle}
-            className={show ? 'modal show' : 'modal hide'}
-          >
-            <div className='modal__container'>
-              <h1 className='modal__title'>{children['props']['movie']['title'] || children['props']['movie']['name']}</h1>
-              <p className='modal__info'>
-                <span className='modal__rating'>Rating: {children['props']['movie']['vote_average'] * 10}% </span>
-                Release date: {children['props']['movie']['release_date']} 
-              </p>
-              {/* <p className='modal__episode'>
-                {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
-                {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
-              </p> */}              
-              <p className='modal__overview'>{children['props']['movie']['overview']}</p>              
-                       
-              <button className='modal__btn modal__btn--red'>
-                <PlayLogo className='header__container-btnMyList-play' />
-                Play
-              </button>
-              <button  className='modal__btn'
-                onClick={ () => {                   
-                  addMovie(children['props']['movie']) } }>
-                <AddLogo className='header__container-btnMyList-add' />
-                My List
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-  )
- ```
- - Moive의 정보를 받아 출력하는 코드 입니다.
