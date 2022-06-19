@@ -20,3 +20,9 @@
 ![Alt text](/image/홈_중단.png)
 ![Alt text](/image/홈_하단.png)
 ![Alt_text](/image/홈_상세정보.png)
+
+
+- 결과물 시연
+ - 메인화면
+ ![Alt_text](/image/메인 1.png)
+ ![Alt_text](/image/메인 2.png)
