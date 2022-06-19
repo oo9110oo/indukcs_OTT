@@ -405,8 +405,8 @@ export default MovieList
  - 삭제가 완료되면 창을 새로고침하게 됩니다.
 
  - 검색
- ![Alt_text](/image/검색.png)
- ![Alt_text](/image/검색_없음.png)
+ ![Alt_text](/image/검색.PNG)
+ ![Alt_text](/image/검색_없음.PNG)
  - Header.js
  ```javascript
  const onChange = async (event) => {
