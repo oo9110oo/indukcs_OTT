@@ -5,8 +5,8 @@
 
 .search-container {
    background-color: $color-background;
-   height: 150%;
-   padding-bottom: 10rem;
+   height: 150%;   
+   padding-bottom: 18rem;
    padding-left: 4rem;
 }
 
@@ -15,8 +15,9 @@
    justify-content: center;
    align-content: center;
    color: #c5c5c5;
-   height: 100%;
-   padding-top: 25rem;
+   height: 100%;   
+   padding-top: 25rem;   
+   padding-bottom: 27rem;
 
    &__text {
       font-size: 1.6rem;
