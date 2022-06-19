@@ -539,7 +539,7 @@ const Search = () => {
 
 export default Search
  ```
- - debouncedSearchTerm 에 검색한 값을 저장하지만 useDebounce 를 사용해 바로바로 저장하는게 입력이 끝나고 좀 있다 저장하게 됩니다.
+ - debouncedSearchTerm 에 검색한 값을 저장하지만 useDebounce 를 사용해 바로바로 저장하는게 아니라, 입력이 끝나고 좀 있다 저장하게 됩니다.
  - 검색값이 있으면 검색창이 계속 유지되고 검색값이 다 지워지면 다시 메인화면으로 돌아갑니다.
  - 검색해서 나온 영상 이미지들을 클릭시 상세화면이 나옵니다.
  - 만약 검색한 결과가 없을시에 별도의 메시지가 나옵니다.
