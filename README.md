@@ -151,3 +151,40 @@ export default Home
  - useSelector는 리액트의 리덕스 스토어 관련 Hook중 하나이다. 이 Hook은 스토어의 상태값을 반환해주는 역할을 한다.
  - useSelector를 사용한 함수에서 리덕스 스토어의 상태값이 바뀐 경우 바뀐 스토어의 상태값을 다시 가져와 컴포넌트를 렌더링 시킨다.
  - redux의 액션 생성함수를 실행하여 리덕스 스토어에 변경된 상태값을 저장하기 위해서는 useDispatch라는 리액트 훅을 사용하여 액션을 실행시켜야 한다.
+ - store 구조
+ ![Alt_text](/image/store구조.png)
+``` actions index.js
+export const fetchNetflixOriginals = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: FETCH_NETFLIX_ORIGINALS, payload: dummy["NetflixOriginals"] })
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+}
+
+export const fetchTrending = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: FETCH_TRENDING, payload: dummy["Trending"] })
+    } catch (error) {}
+  }
+}
+
+```
+ - 저희 조는 DB를 사용하지 않고 더미데이터를 만들어서 사용하고 있어서 더미데이터를 호출하는 식으로 데이터를 가져오고 있습니다.
+``` reducer 
+import { FETCH_ACTION_MOVIES } from '../actions/index';
+
+export default function (state = {}, action) {
+  switch (action.type) {
+    case FETCH_ACTION_MOVIES:
+      const data = action.payload.results;
+      return { ...state, data };
+    default:
+      return state;
+  }
+}
+```
+ - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
