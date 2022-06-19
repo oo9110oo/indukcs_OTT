@@ -24,5 +24,5 @@
 
 ### 결과물 시연
  - 메인화면   
- ![Alt_text](/image/%EB%A9%94%EC%9D%B81.png)   
- ![Alt_text](/image/%EB%A9%94%EC%9D%B82.png)
+ ![Alt_text](/image/메인1.png)   
+ ![Alt_text](/image/메인2.png)
