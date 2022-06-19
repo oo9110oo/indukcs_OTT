@@ -403,3 +403,143 @@ export default MovieList
  - 영화의 사진 오른쪽 상단에 X 버튼을 클릭시 삭제가 가능합니다.
  - X 버튼의 value에 영화의 key를 저장한 후 버튼 클릭시 value값을 listDelete 에 보내서 삭제를 수행합니다.
  - 삭제가 완료되면 창을 새로고침하게 됩니다.
+
+ - 검색
+ ![Alt_text](/image/검색.png)
+ ![Alt_text](/image/검색_없음.png)
+ - Header.js
+ ```javascript
+ const onChange = async (event) => {
+    setUserInput(event.target.value)
+  }
+
+  const navigate = useNavigate();
+
+  useEffect(() => {    
+    if (
+      document.activeElement === searchInput.current &&
+      userInput.length === 0
+    ) {
+      navigate('/')
+    }
+    if (userInput.length > 0) navigate(`/search?q=${userInput}`)
+  }, [userInput, searchInput])
+
+  const onLogoClick = () => {
+    setUserInput('')
+  }
+  .
+  .
+  .
+  <div className='navigation__container--left'>
+    <SearchLogo className='logo' />
+    <input
+      ref={searchInput}
+      value={userInput}
+      onChange={(event) => onChange(event)}
+      className='navigation__container--left__input'
+      type='text'
+      placeholder='Title, genres, people'
+    />
+  </div>
+ ```
+ - 화면 오른쪽 상단에 있는 검색 아이콘 클릭시 검색창이 나타납니다.
+ - onChange 로 input 안의 값이 변경될 때 마다 주소창이 /search?q=값 으로 변경됩니다.
+ - App.js에 설정한 대로 URL이 /search로 변해서 검색창으로 이동합니다.
+ - Search.js
+ ```javascript
+ import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import MovieModal from '../component/MovieModal'
+import Modal from '../component/Modal'
+import { useDebounce } from '../hook/useDebounce'
+import * as movieActions from '../store/actions'
+
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search)
+}
+
+const Search = () => {
+  let query = useQuery()
+  const debouncedSearchTerm = useDebounce(query.get('q'), 500)
+  const [isToggleModal, setIsToggleModal] = useState(false)
+  const { searchResults, isLoading } = useSelector((state) => state.searchMovie)
+  const { movieDetails } = useSelector((state) => state.movieDetails)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      dispatch(movieActions.fetchSearchMovie(debouncedSearchTerm))
+    }
+  }, [debouncedSearchTerm])
+
+  const onCloseModalHandler = () => {
+    setIsToggleModal(false)
+  }
+
+  const onSelectMovieHandler = (movie) => {
+    dispatch(movieActions.fetchMovieDetails(movie.media_type, movie.id))
+    setIsToggleModal(true)
+  }
+
+  const renderSearchResults = () => {
+    return searchResults.length > 0 ? (
+      <>
+        <div className='search-container'>
+          {searchResults.map((movie) => {
+            if (movie.backdrop_path !== null && movie.media_type !== 'person') {
+              const movieImageUrl =
+                'https://image.tmdb.org/t/p/w500' + movie.backdrop_path
+              return (
+                <div className='movie'>
+                  <div
+                    onClick={() => onSelectMovieHandler(movie)}
+                    className='movie__column-poster'
+                  >
+                    <img src={movieImageUrl} alt='' className='movie__poster' />
+                  </div>
+                </div>
+              )
+            }
+          })}
+        </div>
+        <Modal
+          show={isToggleModal}
+          modalClosed={onCloseModalHandler}
+          backgroundImage={
+            movieDetails.backdrop_path || movieDetails.poster_path
+          }
+        >
+          <MovieModal movie={movieDetails} />
+        </Modal>
+      </>
+    ) : (
+      <div className='no-results'>
+        <div className='no-results__text'>
+          <p>
+            Your search for "{debouncedSearchTerm}" did not have any matches.
+          </p>
+          <p>Suggestions:</p>
+          <ul>
+            <li>Try different keywords</li>
+            <li>Looking for a movie or TV show?</li>
+            <li>Try using a movie, TV show title, an actor or director</li>
+            <li>Try a genre, like comedy, romance, sports, or drama</li>                        
+          </ul>
+        </div>        
+      </div>
+    )
+  }
+
+  return !isLoading ? renderSearchResults() : <h1>Loading...</h1>
+}
+
+export default Search
+ ```
+ - debouncedSearchTerm 에 검색한 값을 저장하지만 useDebounce 를 사용해 바로바로 저장하는게 입력이 끝나고 좀 있다 저장하게 됩니다.
+ - 검색값이 있으면 검색창이 계속 유지되고 검색값이 다 지워지면 다시 메인화면으로 돌아갑니다.
+ - 검색해서 나온 영상 이미지들을 클릭시 상세화면이 나옵니다.
+ - 만약 검색한 결과가 없을시에 별도의 메시지가 나옵니다.
