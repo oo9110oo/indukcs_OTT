@@ -153,7 +153,8 @@ export default Home
  - redux의 액션 생성함수를 실행하여 리덕스 스토어에 변경된 상태값을 저장하기 위해서는 useDispatch라는 리액트 훅을 사용하여 액션을 실행시켜야 한다.
  - store 구조
  ![Alt_text](/image/store구조.png)
-``` actions index.js
+ - action index.js
+``` javascript
 export const fetchNetflixOriginals = () => {
   return async (dispatch) => {
     try {
@@ -174,7 +175,8 @@ export const fetchTrending = () => {
 
 ```
  - 저희 조는 DB를 사용하지 않고 더미데이터를 만들어서 사용하고 있어서 더미데이터를 호출하는 식으로 데이터를 가져오고 있습니다.
-``` reducer 
+ - reducer
+``` javascript 
 import { FETCH_ACTION_MOVIES } from '../actions/index';
 
 export default function (state = {}, action) {
@@ -188,3 +190,28 @@ export default function (state = {}, action) {
 }
 ```
  - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
+
+  - 영화 상세보기 (모달창)   
+
+  ![Alt_text](/image/modal.png)
+
+ - MoiveGroup.js
+``` javascript
+if (movie.poster_path && movie.backdrop_path !== null) {
+              return (
+                <SwiperSlide
+                  onClick={() => selectMovieHandler(movie)}                  
+                  key={idx}
+                  className={
+                    'movieShowcase__container--movie' +
+                    (isNetflixMovies ? '__netflix' : '')
+                  }
+                >
+                  <img
+                    src={movieImageUrl}
+                    className='movieShowcase__container--movie-image'
+                  />
+                </SwiperSlide>
+              )
+            }
+```
