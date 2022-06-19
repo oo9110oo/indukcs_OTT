@@ -192,10 +192,10 @@ export default function (state = {}, action) {
  - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
 
  - 마이리스트
- ![Alt text](/image/마이리스트_추가.png)
- ![Alt text](/image/마이리스트_중복.png)
- ![Alt text](/image/마이리스트.png)
- ![Alt text](/image/마이리스트_저장.png)
+ ![Alt text](/image/마이리스트_추가.PNG)
+ ![Alt text](/image/마이리스트_중복.PNG)
+ ![Alt text](/image/마이리스트.PNG)
+ ![Alt text](/image/마이리스트_저장.PNG)
 
  마이리스트 구조
  - Modal.js
