@@ -327,6 +327,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
  ```
  - My List 버튼을 클릭시 onClick 으로 영화 데이터를 addMovie 에 넘기게 된다.
  - 마이리스트에 추가한 영화 데이터를 저장하기 위해 localStorage 를 사용했습니다.
+ - localStore란 브라우저가 가지고 있는 임시 저장공간(localStorage)을 말합니다.
  - 마이리스트에 저장할 때 첫번째 영화 저장일 경우 list라는 key를 가진 localStorage 를 생성합니다. 이미 list가 생성된 상태면 값을 +1 해줍니다
  - list는 영화를 저장한 횟수를 값으로 가지고 있습니다.
  - 이후 영화의 데이터를 list의 값을 key로 사용해 새로운 localStorage 에 저장합니다.
