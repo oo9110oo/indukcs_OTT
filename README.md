@@ -188,3 +188,136 @@ export default function (state = {}, action) {
 }
 ```
  - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
+ 
+ - 마이리스트
+ ![Alt text](/image/마이리스트_추가.png)
+ ![Alt text](/image/마이리스트_중복.png)
+ ![Alt text](/image/마이리스트.png)
+ ![Alt text](/image/마이리스트_저장.png)
+
+ 마이리스트 구조
+ - Modal.js
+ ```javascript
+  const addMovie = (movie) => {
+    let movies = localStorage.getItem('list'); // movieList에 저장된 영화 개수
+    var check = true; // 이미 저장된 영화인지 확인용 변수
+    localStorage.setItem('checkMovie', JSON.stringify([children['props']['movie']])) // 저장된 영화인지 확인하기 위한 임시 저장
+    if(movies != null){ // 저장된 영화인지 확인
+      for (let i = 0; i <= movies; i++) {
+        if(localStorage.getItem(i) != null) {
+          if(JSON.parse(localStorage.getItem('checkMovie'))[0]['backdrop_path'] == JSON.parse(localStorage.getItem(i))[0]['backdrop_path']){
+            check = false;
+          }
+        }
+      }
+    }    
+
+    if(check == true) {
+      movieNumber.current += 1;
+      setMovieInput([movie, ...movieInput])
+      localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
+      //localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
+      localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']]))    
+    
+      var flag = true;      
+
+      if (flag) {
+        movieNumber.current += 1;
+        setMovieInput([movie, ...movieInput])
+      }
+
+      alert("My List에 저장했습니다")  
+    }
+    else alert("이미 My List에 있는 영화입니다.")
+  }
+  .
+  .
+  .
+  <button className='modal__btn modal__btn--red'>
+    <PlayLogo className='header__container-btnMyList-play' />
+    Play
+  </button>
+  <button  className='modal__btn'
+    onClick={ () => {                   
+      addMovie(children['props']['movie']) } }>
+    <AddLogo className='header__container-btnMyList-add' />
+    My List
+  </button>
+ ```
+ - My List 버튼을 클릭시 onClick 으로 영화 데이터를 addMovie 에 넘기게 된다.
+ - 마이리스트에 추가한 영화 데이터를 저장하기 위해 localStorage 를 사용했습니다.
+ - 마이리스트에 저장할 때 첫번째 영화 저장일 경우 list라는 key를 가진 localStorage 를 생성합니다. 이미 list가 생성된 상태면 값을 +1 해줍니다
+ - list는 영화를 저장한 횟수를 값으로 가지고 있습니다.
+ - 이후 영화의 데이터를 list의 값을 key로 사용해 새로운 localStorage 에 저장합니다.
+ - 마이리스트를 추가할 때 저장된 영화 데이터들과 비교해 중복 체크를 합니다.
+ - MovieList.js
+ ```javascript
+ import React, { useState, useEffect } from 'react'
+import "../static/scss/movieList.scss"
+
+const MovieList = () => {  
+
+  const listDelete = (e) => {
+    if(window.confirm("정말 삭제하시겠습니까?")) {
+      localStorage.removeItem(e)      
+      window.location.reload(); // 새로고침. 새로고침 안하면 화면이 그대로 남아있어서
+    }
+  }
+
+  const rendering = () => {
+    let movies = localStorage.getItem('list'); // myList에 저장된 영상 개수
+    const result = [];
+    let resultCnt = 0;
+    if (movies == null) {
+      result.push(<div>
+        <h3 style={{color: 'white'}}>myList가 비어있습니다.</h3>
+      </div>)
+      return result;
+    } else {
+      for (let i = 0; i <= movies; i++) { // 저장된 영상들의 key는 다 숫자임
+        if(localStorage.getItem(i) != null) { // 영상 데이터 있는지 확인
+          const title = JSON.parse(localStorage.getItem(i))[0]['title'] || JSON.parse(localStorage.getItem(i))[0]['name'];
+          // 영상들 중에서 제목이 title에 저장되는거랑 name에 저장되는게 있어서 둘 중 하나만 있어도 가져오도록 설정
+          const imagePath = 'https://image.tmdb.org/t/p/original/' + JSON.parse(localStorage.getItem(i))[0]['backdrop_path'];
+          result.push(<div className='addMovieList' key={title}>          
+            <img className='movieShowcase__container--movie-image' src={imagePath} style={{width:'200px'}} />
+            <button className='deleteIcon' value={i} onClick={(e) => listDelete(e.target.value)}></button>
+            <h5 className='movieName'>{title}</h5>
+            </div>
+          );
+          resultCnt++;
+        }
+      }
+      if(resultCnt == 0) {
+        result.push(<div>
+          <h3 style={{color: 'white'}}>myList가 비어있습니다.</h3>
+        </div>)
+      }
+
+      return result;
+    }
+    
+  };
+
+
+
+    return (
+      <div className='detail-menu-modal'>
+        
+        <h3 className='modal__title'>My List</h3>    
+        <div>          
+          <div className='imageList'>{rendering()}</div>
+        </div>          
+        
+      </div>
+    )
+}
+
+export default MovieList
+ ```
+ - 마이리스트는 모달 형식으로 제작했습니다.
+ - list를 key로 가지고 있는 localStorage 를 불러와서 list 만큼 반복문을 사용해 저장되어 있는 모든 영화를 출력합니다.
+ - 출력 전에 값이 정말 있는지 확인합니다.
+ - 영화의 사진 오른쪽 상단에 X 버튼을 클릭시 삭제가 가능합니다.
+ - X 버튼의 value에 영화의 key를 저장한 후 버튼 클릭시 value값을 listDelete 에 보내서 삭제를 수행합니다.
+ - 삭제가 완료되면 창을 새로고침하게 됩니다.
