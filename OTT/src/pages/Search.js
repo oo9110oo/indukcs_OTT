@@ -77,9 +77,9 @@ const Search = () => {
             <li>Try different keywords</li>
             <li>Looking for a movie or TV show?</li>
             <li>Try using a movie, TV show title, an actor or director</li>
-            <li>Try a genre, like comedy, romance, sports, or drama</li>
+            <li>Try a genre, like comedy, romance, sports, or drama</li>                        
           </ul>
-        </div>
+        </div>        
       </div>
     )
   }
