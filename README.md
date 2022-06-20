@@ -191,6 +191,8 @@ export default function (state = {}, action) {
 ```
  - reducre 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
 
+
+
 - 영화 상세보기 (모달창)   
 
  ![Alt_text](/image/modal.png)
@@ -269,6 +271,8 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   )
  ```
  - Moive의 정보를 받아 출력하는 코드 입니다.
+
+
 
  - 마이리스트
  ![Alt text](/image/마이리스트_추가.PNG)
@@ -403,6 +407,8 @@ export default MovieList
  - 영화의 사진 오른쪽 상단에 X 버튼을 클릭시 삭제가 가능합니다.
  - X 버튼의 value에 영화의 key를 저장한 후 버튼 클릭시 value값을 listDelete 에 보내서 삭제를 수행합니다.
  - 삭제가 완료되면 창을 새로고침하게 됩니다.
+
+
 
  - 검색
  ![Alt_text](/image/검색.PNG)
@@ -543,3 +549,58 @@ export default Search
  - 검색값이 있으면 검색창이 계속 유지되고 검색값이 다 지워지면 다시 메인화면으로 돌아갑니다.
  - 검색해서 나온 영상 이미지들을 클릭시 상세화면이 나옵니다.
  - 만약 검색한 결과가 없을시에 별도의 메시지가 나옵니다.
+
+
+ - 마지막으로는 기존 코드에서 문제점을 조금씩 보완하였습니다.
+ - MovieList.js
+ ```javascript
+  // Navigation 사용
+  const navigate = useNavigate()
+
+  // MyList 항목 삭제 함수
+  const listDelete = (e) => {
+    const movies = localStorage.getItem('list')
+
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      for (let i = e; i < movies; i++) {
+        localStorage.setItem(i, localStorage.getItem(i + 1))
+      }
+      localStorage.removeItem(movies)
+      localStorage.setItem('list', parseInt(localStorage.getItem('list')) - 1)
+
+      const serachText = window.location.href.split('search')[1]
+      if (serachText == undefined) navigate('/')
+      else navigate('search' + serachText);
+    }
+  }
+
+  // 렌더링 함수
+  const rendering = () => {
+    let movies = localStorage.getItem('list') // myList에 저장된 영상 개수
+    const result = []
+    // myList 비어있는지 검사, 아니면 myList 불러옴
+    if (movies == null || parseInt(movies) <= 0) {
+      localStorage.setItem('list', 0)
+      result.push(
+        <div key='none'>
+          <h3>
+            My List가 비어있습니다.<br /><br />
+            관심 있는 컨텐츠를 My List에 추가해 주세요!
+          </h3>
+        </div>)
+      return result
+ ```
+ - 기존 방식은 window.location.href를 이용하여 웹 페이지를 새로고침 합니다.
+ - 이 때문에 My List가 웹 페이지를 리프레시하며 강제로 꺼졌습니다.
+ - 또한 검색 내용이 있으면 웹 주소가 달라져 웹 페이지가 제대로 작동을 안 하는 이슈가 있었습니다.
+ - 따라서 useNavigate hook을 활용하여 웹 페이지를 리프레시 함으로써 검색 내용을 동시에 보유할 수 있는 형태로 만들었습니다.
+![Alt_text](/image/마이리스트_기능개선.PNG)
+![Alt_text](/image/마이리스트_기능개선2.PNG)
+
+
+ - 그리고 My List에 항목이 없을 때 문구가 제대로 표시되지 않는 이슈가 있었습니다.
+ - 그래서 My List를 관리하는 로직을 약간 수정하였습니다.
+ - 영화를 삭제하면 localStorage의 키값을 줄여 index를 하나씩 당겨오는 형태로 만들었습니다.
+ - 또한 영화의 개수가 0개 이하이면 My List가 비어있다고 판단하도록 하였습니다. 
+![Alt_text](/image/마이리스트_삭제전.PNG)
+![Alt_text](/image/마이리스트_삭제후.PNG)
