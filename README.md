@@ -594,13 +594,13 @@ export default Search
  - 이 때문에 My List가 웹 페이지를 리프레시하며 강제로 꺼졌습니다.
  - 또한 검색 내용이 있으면 웹 주소가 달라져 웹 페이지가 제대로 작동을 안 하는 이슈가 있었습니다.
  - 따라서 useNavigate hook을 활용하여 웹 페이지를 리프레시 함으로써 검색 내용을 동시에 보유할 수 있는 형태로 만들었습니다.
-![Alt_text](/image/마이리스트_기능개선.PNG)
-![Alt_text](/image/마이리스트_기능개선2.PNG)
+![Alt_text](/image/마이리스트_기능개선.png)
+![Alt_text](/image/마이리스트_기능개선2.png)
 
 
  - 그리고 My List에 항목이 없을 때 문구가 제대로 표시되지 않는 이슈가 있었습니다.
  - 그래서 My List를 관리하는 로직을 약간 수정하였습니다.
  - 영화를 삭제하면 localStorage의 키값을 줄여 index를 하나씩 당겨오는 형태로 만들었습니다.
  - 또한 영화의 개수가 0개 이하이면 My List가 비어있다고 판단하도록 하였습니다. 
-![Alt_text](/image/마이리스트_삭제전.PNG)
-![Alt_text](/image/마이리스트_삭제후.PNG)
+![Alt_text](/image/마이리스트_삭제전.png)
+![Alt_text](/image/마이리스트_삭제후.png)
