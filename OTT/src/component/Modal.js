@@ -3,15 +3,19 @@ import Backdrop from '../component/Backdrop'
 import { ReactComponent as AddLogo } from '../static/images/add.svg'
 import { ReactComponent as PlayLogo } from '../static/images/play-button.svg'
 
+import ReactPlayer from 'react-player'
+
 const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundImage: `url(https://image.tmdb.org/t/p/original/${backgroundImage})`,
   }
 
-  const [movieInput, setMovieInput] = useState([]);
+  const [movieInput, setMovieInput] = useState([])
 
-  const movieNumber = useRef(0);
+  const [isMuted, setIsMuted] = useState(false)
+
+  const movieNumber = useRef(0)
 
   const addMovie = (movie) => {
     let movies = localStorage.getItem('list'); // movieList에 저장된 영화 개수
@@ -30,7 +34,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
     if(check == true) {
       movieNumber.current += 1;
       setMovieInput([movie, ...movieInput])
-      localStorage.getItem('list') === null ? localStorage.setItem('list', 0) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
+      localStorage.getItem('list') === null ? localStorage.setItem('list', 1) : localStorage.setItem('list', parseInt(localStorage.getItem('list'))+1)
       //localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']['title'],children['props']['movie']['release_date'],children['props']['movie']['overview']]))    
       localStorage.setItem(localStorage.getItem('list'), JSON.stringify([children['props']['movie']]))    
     
@@ -58,7 +62,9 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
               <h1 className='modal__title'>{children['props']['movie']['title'] || children['props']['movie']['name']}</h1>
               <p className='modal__info'>
                 <span className='modal__rating'>Rating: {children['props']['movie']['vote_average'] * 10}% </span>
-                Release date: {children['props']['movie']['release_date']} 
+                Release date: { children['props']['movie']['release_date'] != null?
+                                children['props']['movie']['release_date'] :
+                                children['props']['movie']['first_air_date']} 
               </p>
               {/* <p className='modal__episode'>
                 {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
@@ -67,7 +73,6 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
               <p className='modal__overview'>{children['props']['movie']['overview']}</p>              
                        
               <button className='modal__btn modal__btn--red'>
-                <PlayLogo className='header__container-btnMyList-play' />
                 Play
               </button>
               <button  className='modal__btn'

@@ -10,10 +10,10 @@ import { ReactComponent as DropdownArrow } from '../static/images/drop-down-arro
 import MovieList from './MovieList'
 import BodyBlackoutStyle from './BodyBlackOutStyle'
 
-import { useViewport } from '../hook/useViewport'
+//import { useViewport } from '../hook/useViewport'
 
 const Header = () => {
-  const searchInput = React.useRef(null)
+  const searchInput = useRef(null)
   const [userInput, setUserInput] = useState('')
   const [scrollDimensions] = useScroll()
   const { scrollY } = scrollDimensions
@@ -44,7 +44,11 @@ const Header = () => {
   }
 
   const goHome = () => {
-    window.location.href = "/"
+    window.location.href = '/'
+  }
+
+  const onCategoryClick = (name) => {
+    window.location.href= "/#" + name
   }
 
 //  console.log(DropdownArrow)
@@ -60,26 +64,19 @@ const Header = () => {
         </NavLink>
         <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
         {/* <img src="{DropdownArrow}" alt="DropdownArrow" /> */}
-        <div className='navigation__container-link pseudo-link'
-        onClick={() => goHome()}
-        >Home</div>
-        <div className='navigation__container-link pseudo-link'><a href='#Netflix Originals'>Netflix</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Trending'>Trending</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Top Rated'>Top Rated</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Action Movies'>Action Movies</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Comedy'>Comedy</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Horror Movies'>Horror Movies</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Romance'>Romance</a></div>
-        <div className='navigation__container-link pseudo-link'><a href='#Documentaries'>Documentaries</a></div>
-        <div className='navigation__container-link pseudo-link'
-          onClick={() => onModalVisible(true)}          
-        >                  
-          My List</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => goHome()}>Home</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Netflix Originals')}>Netflix</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Trending')}>Trending</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Top Rated')}>Top Rated</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Action Movies')}>Action Movies</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Comedy')}>Comedy</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Horror Movies')}>Horror Movies</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Romance')}>Romance</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Documentaries')}>Documentaries</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onModalVisible(true)}>My List</div>
         <div>
-        {isVisible && <BodyBlackoutStyle onModalVisible={onModalVisible} />}
-        {isVisible && (
-          <MovieList setModalVisible={setModalVisible} />
-        )}
+          {isVisible && <BodyBlackoutStyle onModalVisible={onModalVisible} />}
+          {isVisible && <MovieList />}
         </div>
         <div className='navigation__container--left'>
           <SearchLogo className='logo' />
@@ -89,7 +86,7 @@ const Header = () => {
             onChange={(event) => onChange(event)}
             className='navigation__container--left__input'
             type='text'
-            placeholder='Title, genres, people'
+            placeholder='Title, Genres, People...'
           />
         </div>
 

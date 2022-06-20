@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
 import { ReactComponent as PlayLogo } from '../static/images/play-button.svg'
-import { ReactComponent as AddLogo } from '../static/images/add.svg'
 import { ReactComponent as MuteIcon } from '../static/images/mute.svg'
 import { ReactComponent as UnmuteIcon } from '../static/images/unmute.svg'
 import ReactPlayer from 'react-player'
 
+
  const Moviemain = ({ movie: { title, overview } }) => {
   
-//const Moviemain = () => {
   const [isMuted, setIsMuted] = useState(true)
 
   return (

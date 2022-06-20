@@ -70,14 +70,14 @@ const Search = () => {
       <div className='no-results'>
         <div className='no-results__text'>
           <p>
-            Your search for "{debouncedSearchTerm}" did not have any matches.
+            찾으시는 "{debouncedSearchTerm}" 에 대한 결과가 없습니다.
           </p>
-          <p>Suggestions:</p>
+          <p>해결 방안</p>
           <ul>
-            <li>Try different keywords</li>
-            <li>Looking for a movie or TV show?</li>
-            <li>Try using a movie, TV show title, an actor or director</li>
-            <li>Try a genre, like comedy, romance, sports, or drama</li>
+            <li>다른 키워드를 사용해 보세요.</li>
+            <li>영화나 TV 프로그램을 찾고 계신가요?</li>
+            <li>영화 또는 TV 프로그램의 제목, 배우, 감독을 통해 검색해 주세요.</li>
+            <li>Comedy, Romance와 같이 장르로 검색해 보세요.</li>
           </ul>
         </div>
       </div>
