@@ -1,3 +1,4 @@
+// 검색 페이지 컴포넌트
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
@@ -35,6 +36,7 @@ const Search = () => {
     setIsToggleModal(true)
   }
 
+  // 검색 결과 렌더링. 검색 결과가 없는 경우를 대비
   const renderSearchResults = () => {
     return searchResults.length > 0 ? (
       <>

@@ -1,3 +1,4 @@
+// 모달 배경 그림
 import React from 'react'
 
 const backdrop = ({ toggleBackdrop, show }) =>

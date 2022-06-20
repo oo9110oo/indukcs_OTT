@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+// 마이 리스트 모달
 import { useNavigate } from 'react-router-dom'
 import "../static/scss/movieList.scss"
 
-const MovieList = ({}) => {
+const MovieList = () => {
+  // Navigation 사용
   const navigate = useNavigate()
 
-  const listDelete = async (e) => {
+  // MyList 항목 삭제 함수
+  const listDelete = (e) => {
     const movies = localStorage.getItem('list')
 
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -15,6 +17,7 @@ const MovieList = ({}) => {
       localStorage.removeItem(movies)
       localStorage.setItem('list', parseInt(localStorage.getItem('list')) - 1)
 
+      // s  
       const serachText = window.location.href.split('search')[1]
       if (serachText == undefined) navigate('/')
       else navigate('search' + serachText); // 새로고침. 새로고침 안하면 화면이 그대로 남아있어서
@@ -22,9 +25,11 @@ const MovieList = ({}) => {
     }
   }
 
+  // 렌더링 함수
   const rendering = () => {
     let movies = localStorage.getItem('list') // myList에 저장된 영상 개수
     const result = []
+    // myList 비어있는지 검사, 아니면 myList 불러옴
     if (movies == null || parseInt(movies) <= 0) {
       localStorage.setItem('list', 0)
       result.push(
@@ -36,10 +41,10 @@ const MovieList = ({}) => {
         </div>)
       return result
     } else {
-      for (let i = 0; i <= movies; i++) { // 저장된 영상들의 key는 다 숫자임
+      for (let i = 0; i <= movies; i++) { // 저장된 영상들의 key는 다 숫자
         if (localStorage.getItem(i + 1) != null) { // 영상 데이터 있는지 확인
           const title = JSON.parse(localStorage.getItem(i + 1))[0]['title'] || JSON.parse(localStorage.getItem(i + 1))[0]['name']
-          // 영상들 중에서 제목이 title에 저장되는거랑 name에 저장되는게 있어서 둘 중 하나만 있어도 가져오도록 설정
+          // 영상들 중에서 제목이 title에 저장되는 것과 name에 저장되는 것이 있어서 둘 중 하나만 있어도 가져오도록 설정
           const imagePath = 'https://image.tmdb.org/t/p/original/' + JSON.parse(localStorage.getItem(i + 1))[0]['backdrop_path']
           result.push(
             <div className='addMovieList' key={title}>

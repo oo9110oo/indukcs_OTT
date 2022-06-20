@@ -1,3 +1,4 @@
+// 영화를 카테고리 별로 나눈 Swiper 컴포넌트
 import React, { Component } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'

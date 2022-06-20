@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as movieActions from '../store/actions'
 
+// 영화 정보 표시하는 몸체
 import MovieMain from './MovieMain'
 import MovieGroup from './MovieGroup'
 

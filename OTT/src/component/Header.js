@@ -1,3 +1,4 @@
+// 헤더 (내비게이션 바)
 import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
@@ -51,7 +52,6 @@ const Header = () => {
     window.location.href= "/#" + name
   }
 
-//  console.log(DropdownArrow)
   return (
     <nav className={'navigation ' + (scrollY > 50 ? 'black' : '')}>
       <ul className='navigation__container'>
@@ -63,7 +63,6 @@ const Header = () => {
           />
         </NavLink>
         <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
-        {/* <img src="{DropdownArrow}" alt="DropdownArrow" /> */}
         <div className='navigation__container-link pseudo-link' onClick={() => goHome()}>Home</div>
         <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Netflix Originals')}>Netflix</div>
         <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Trending')}>Trending</div>
@@ -89,13 +88,6 @@ const Header = () => {
             placeholder='Title, Genres, People...'
           />
         </div>
-
-        {/* <div className='navigation__container-link pseudo-link'>KIDS</div>
-        <div className='navigation__container-link pseudo-link'>DVD</div> }
-        {/* <BellLogo className='navigation__container--bellLogo' /> */}
-
-        {/* <DropdownContent /> */}
-        {/* <DropdownArrow className='navigation__container--downArrow' /> */}
       </ul>
     </nav>
   )

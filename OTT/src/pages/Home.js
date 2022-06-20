@@ -1,8 +1,6 @@
+// 메인 페이지 컴포넌트
 import React, { useState } from 'react'
-import { Provider } from 'react-redux'
-
 import Body from '../component/Body'
-import Body2 from '../component/Body2'
 
 import Modal from '../component/Modal'
 import ModalMovie from '../component/MovieModal'
@@ -20,14 +18,13 @@ const Home = () => {
     setToggleModal(false)
   }
 
+  // 영화 상세정보 모달과 영화 정보 표시
   return (
     <>
       <div className='main-content'>
-
         <Body selectMovieHandler={selectMovieHandler} />
-        {/* <Body2 /> */}
-
       </div>
+
       <Modal
         show={toggleModal}
         modalClosed={closeModal}

@@ -1,3 +1,4 @@
+// 푸터(팀 정보 표시)
 import React from 'react'
 import "../static/scss/footer.scss"
 import DuckingLogo from '../static/images/ducking_full.png'

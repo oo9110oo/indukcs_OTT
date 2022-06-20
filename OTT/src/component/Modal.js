@@ -1,3 +1,4 @@
+// 영화 상세정보 모달
 import React, {useState, useRef} from 'react'
 import Backdrop from '../component/Backdrop'
 import { ReactComponent as AddLogo } from '../static/images/add.svg'
@@ -12,8 +13,6 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
   }
 
   const [movieInput, setMovieInput] = useState([])
-
-  const [isMuted, setIsMuted] = useState(false)
 
   const movieNumber = useRef(0)
 
@@ -65,11 +64,7 @@ const Modal = ({ show, modalClosed, children, backgroundImage }) => {
                 Release date: { children['props']['movie']['release_date'] != null?
                                 children['props']['movie']['release_date'] :
                                 children['props']['movie']['first_air_date']} 
-              </p>
-              {/* <p className='modal__episode'>
-                {number_of_episodes ? ' Episodes: ' + number_of_episodes : ''}
-                {number_of_seasons ? ' Seasons: ' + number_of_seasons : ''}
-              </p> */}              
+              </p>       
               <p className='modal__overview'>{children['props']['movie']['overview']}</p>              
                        
               <button className='modal__btn modal__btn--red'>

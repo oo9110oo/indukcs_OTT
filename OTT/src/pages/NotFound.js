@@ -1,3 +1,4 @@
+// 경로 찾지 못하였을 때 표시할 컴포넌트
 import React from 'react'
 
 const NotFound = () => {
