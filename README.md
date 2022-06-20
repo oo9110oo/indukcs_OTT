@@ -604,3 +604,4 @@ export default Search
  - 또한 영화의 개수가 0개 이하이면 My List가 비어있다고 판단하도록 하였습니다. 
 ![Alt_text](/image/마이리스트_삭제전.png)
 ![Alt_text](/image/마이리스트_삭제후.png)
+![Alt_text](/image/마이리스트_비어있음.png)
