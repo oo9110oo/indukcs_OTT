@@ -108,69 +108,7 @@ export default Home
  - useState는 현재의 state 값과 이 값을 업데이트하는 함수를 쌍으로 제공, 이 함수를 핸들러나 다른 곳에서 호출할 수 있습니다.
  - useState는 클래스에서 사용하는 this.setState와 유사하지만 이전 state와 새로운 state를 합치지 않는다는 차이점이 존재 합니다.
  - Body의 selectMovieHandler 를 클릭하면 해당 movie를 비동기형식으로 전달받아서 Modal 창을 띄우도록 설계했습니다.
-
- - Header.js
-
- ``` javascript
- const Header = () => {
-  const searchInput = useRef(null)
-  const [userInput, setUserInput] = useState('')
-  const [scrollDimensions] = useScroll()
-  const { scrollY } = scrollDimensions
-
-  const [isVisible, setModalVisible] = useState(false);
-  const onModalVisible = (active) => {
-    setModalVisible(active);
-  }
-
-  const onChange = async (event) => {
-    setUserInput(event.target.value)
-  }
-
-  const navigate = useNavigate();
-
-  useEffect(() => {    
-    if (
-      document.activeElement === searchInput.current &&
-      userInput.length === 0
-    ) {
-      navigate('/')
-    }
-    if (userInput.length > 0) navigate(`/search?q=${userInput}`)
-  }, [userInput, searchInput])
-
-  const onLogoClick = () => {
-    setUserInput('')
-  }
-
-  const goHome = () => {
-    window.location.href = '/'
-  }
-
-  const onCategoryClick = (name) => {
-    window.location.href= "/#" + name
-  }
  
- return (
-    <nav className={'navigation ' + (scrollY > 50 ? 'black' : '')}>
-      <ul className='navigation__container'>
-        <NavLink to='/' onClick={() => onLogoClick()}>
-          <img
-            className='navigation__container--logo'
-            src={DuckingLogo}
-            alt=''
-          />
-        </NavLink>
-        <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
-        <div className='navigation__container-link pseudo-link' onClick={() => goHome()}>Home</div>
-        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Netflix Originals')}>Netflix</div>
- 
- ```
- - useScroll은 리액트의 Hook 중 하나입니다. 이 Hook은 사용자가 스크롤을 사용할 때 지정한 조건에 맞추어 기능합니다.
- - useScroll을 이용해 사용자가 스크롤을 내렸을 경우 Y값을 받아와 Header의 배경이 검게 처리되도록 합니다.
- - 로고와 각 카테고리 텍스트에 onCategoryClick 이벤트를 할당하여 각 텍스트가 클릭될 경우 지정된 위치로 이동하는 앵커 액션이 실행됩니다.
- 
-
  - Body.js
 
  ``` javascript
@@ -252,6 +190,116 @@ export default function (state = {}, action) {
 }
 ```
  - reducer 에서 정의된 action값을 가지고와서 data를 return해주고 있습니다.
+
+ - 컴포넌트 별 기능 설명 
+ - Header.js
+
+ ``` javascript
+ const Header = () => {
+  const searchInput = useRef(null)
+  const [userInput, setUserInput] = useState('')
+  const [scrollDimensions] = useScroll()
+  const { scrollY } = scrollDimensions
+
+  const [isVisible, setModalVisible] = useState(false);
+  const onModalVisible = (active) => {
+    setModalVisible(active);
+  }
+
+  const onChange = async (event) => {
+    setUserInput(event.target.value)
+  }
+
+  const navigate = useNavigate();
+
+  useEffect(() => {    
+    if (
+      document.activeElement === searchInput.current &&
+      userInput.length === 0
+    ) {
+      navigate('/')
+    }
+    if (userInput.length > 0) navigate(`/search?q=${userInput}`)
+  }, [userInput, searchInput])
+
+  const onLogoClick = () => {
+    setUserInput('')
+  }
+
+  const goHome = () => {
+    window.location.href = '/'
+  }
+
+  const onCategoryClick = (name) => {
+    window.location.href= "/#" + name
+  }
+ 
+ return (
+    <nav className={'navigation ' + (scrollY > 50 ? 'black' : '')}>
+      <ul className='navigation__container'>
+        <NavLink to='/' onClick={() => onLogoClick()}>
+          <img
+            className='navigation__container--logo'
+            src={DuckingLogo}
+            alt=''
+          />
+        </NavLink>
+        <DropdownArrow className='navigation__container--downArrow-2'></DropdownArrow>
+        <div className='navigation__container-link pseudo-link' onClick={() => goHome()}>Home</div>
+        <div className='navigation__container-link pseudo-link' onClick={() => onCategoryClick('Netflix Originals')}>Netflix</div>
+ 
+ ```
+ - useScroll은 리액트의 Hook 중 하나입니다. 이 Hook은 사용자가 스크롤을 사용할 때 지정한 조건에 맞추어 기능합니다.
+ - useScroll을 이용해 사용자가 스크롤을 내렸을 경우 Y값을 받아와 Header의 배경이 검게 처리되도록 합니다.
+ - 로고와 각 카테고리 텍스트에 onCategoryClick 이벤트를 할당하여 각 텍스트가 클릭될 경우 지정된 위치로 이동하는 앵커 액션이 실행됩니다.
+
+ - MovieMain.js
+
+``` javascript
+const Moviemain = ({ movie: { title, overview } }) => {
+  const [isMuted, setIsMuted] = useState(true)
+
+  return (
+    <div className='header'>
+      <ReactPlayer
+        playing={true}
+        loop={true}
+        width='100%'
+        height='100%'
+        volume={1}
+        muted={isMuted}
+        className='header__video'
+        url='https://vimeo.com/636702859'
+      />
+      <h1 className='header__container-heading'>{title}</h1>
+      <button
+        onClick={() => window.location.href = "https://youtu.be/mI9oyFMUlfg"}
+        className='header__container-btnPlay'
+      >
+        <PlayLogo className='header__container-btnMyList-play' />
+        Play
+      </button>
+
+      {isMuted ? (
+        <MuteIcon
+          onClick={() => setIsMuted(false)}
+          className='header__container-btnVolume'
+        />
+      ) : (
+        <UnmuteIcon
+          onClick={() => setIsMuted(true)}
+          className='header__container-btnVolume'
+        />
+      )}
+      <p className='header__container-overview'>{overview}</p>
+      <div className='header__container--fadeBottom'></div>
+    </div>
+  )
+}
+
+```
+
+- useState를 이용해 메인 화면의 동영상 위로 띄운 버튼이 클릭될 경우 음소거(isMuted) 컴포넌트의 state가 변경되도록 설계했습니다.
 
 
 
