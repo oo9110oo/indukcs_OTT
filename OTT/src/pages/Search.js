@@ -79,7 +79,7 @@ const Search = () => {
             <li>영화 또는 TV 프로그램의 제목, 배우, 감독을 통해 검색해 주세요.</li>
             <li>Comedy, Romance와 같이 장르로 검색해 보세요.</li>
           </ul>
-        </div>
+        </div>        
       </div>
     )
   }

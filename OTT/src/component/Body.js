@@ -16,7 +16,7 @@ const MainContent = ({ selectMovieHandler }) => {
   const romanceMovies = useSelector((state) => state.romance)
   const documentaries = useSelector((state) => state.documentary)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() // dispatch로 재선언하여 사용한다.
 
   useEffect(() => {
     dispatch(movieActions.fetchMovieDetails('movie', '284052')) 

@@ -1,9 +1,9 @@
 .footer {
    background-color: #000000;
    padding-top: 5rem;
-   padding-bottom: 6rem;
+   padding-bottom: 6rem;    
    grid-column: 1 / 13;
-   text-align: left;
+   text-align: left;   
 
    &__copyright {
       color: #fff;
@@ -27,7 +27,7 @@
 
 .footer #footer_box {
    margin: 0 auto;
-   position: relative;
+   position: relative;   
 }
 
 .footer #footer_logo {
